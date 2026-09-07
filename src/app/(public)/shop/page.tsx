@@ -16,6 +16,11 @@ export default async function ShopPage({
     query: typeof query === "string" ? query : undefined,
   })
 
+
+
+
+
+  
   return (
     <div className="space-y-6">
       <h1 className="text-2xl font-semibold tracking-tight">Shop</h1>

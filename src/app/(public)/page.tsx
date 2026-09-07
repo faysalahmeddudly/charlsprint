@@ -10,7 +10,7 @@ export default function HomePage() {
       <p className="max-w-md text-muted-foreground">
         Shop apparel, accessories, and home goods printed on demand and shipped to your door.
       </p>
-      <Button size="lg" render={<Link href="/shop" />}>
+      <Button size="lg" nativeButton={false} render={<Link href="/shop" />}>
         Shop now
       </Button>
     </div>
