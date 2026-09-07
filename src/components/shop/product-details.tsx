@@ -7,12 +7,12 @@ import { CheckIcon, ShoppingBagIcon, ArrowRightIcon } from "lucide-react"
 import { cn } from "cn"
 import { Button } from "@/components/ui/button"
 import { useCart } from "@/hooks/use-cart"
+import { ColorPickerDialog } from "@/components/shop/color-picker-dialog"
 import {
-  ColorPickerDialog,
   currency,
   isLightColor,
   VISIBLE_COLOR_COUNT,
-} from "@/components/shop/product-customizer"
+} from "@/components/shop/product-customizer.constants"
 import type { Garment } from "@/app/(public)/shop/_data"
 
 const SURFACE_CARD = "rounded-2xl bg-sky-50/70 p-4 dark:bg-sky-500/5"
