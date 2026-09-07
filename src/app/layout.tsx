@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { anton, bebasNeue, cinzel, dmSans, inter, plusJakartaSans } from "@/lib/fonts";
 import { AppProviders } from "@/providers/app-providers";
 import "./globals.css";
 
@@ -22,7 +23,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${dmSans.variable} ${inter.variable} ${plusJakartaSans.variable} ${bebasNeue.variable} ${anton.variable} ${cinzel.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <AppProviders>{children}</AppProviders>
