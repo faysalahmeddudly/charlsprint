@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import { ProductGrid } from "@/components/shop/product-grid"
-import { productService } from "@/services/product.service"
+import { garments } from "./_data"
 
 export const metadata: Metadata = {
   title: "Shop | CharlsPrint",
@@ -12,15 +12,12 @@ export default async function ShopPage({
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }) {
   const { query } = await searchParams
-  const { items } = await productService.list({
-    query: typeof query === "string" ? query : undefined,
-  })
+  const q = typeof query === "string" ? query.trim().toLowerCase() : ""
 
+  const items = q
+    ? garments.filter((garment) => garment.name.toLowerCase().includes(q))
+    : garments
 
-
-
-
-  
   return (
     <div className="space-y-6">
       <h1 className="text-2xl font-semibold tracking-tight">Shop</h1>
