@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
-import { ProductCustomizer } from "@/components/shop/product-customizer"
+import { ProductDetails } from "@/components/shop/product-details"
 import { getGarmentBySlug } from "../_data"
 
 interface ProductPageParams {
@@ -27,5 +27,5 @@ export default async function ProductPage({
 
   if (!garment) notFound()
 
-  return <ProductCustomizer garment={garment} />
+  return <ProductDetails garment={garment} />
 }

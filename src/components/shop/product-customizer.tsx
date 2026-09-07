@@ -48,11 +48,11 @@ import {
 import { anton, bebasNeue, cinzel, plusJakartaSans } from "@/lib/fonts"
 import type { Garment } from "@/app/(public)/shop/_data"
 
-function currency(value: number) {
+export function currency(value: number) {
   return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(value)
 }
 
-const VISIBLE_COLOR_COUNT = 8
+export const VISIBLE_COLOR_COUNT = 8
 
 const SURFACE_CARD = "rounded-2xl bg-sky-50/70 p-4 dark:bg-sky-500/5"
 
@@ -63,7 +63,7 @@ const ZONE_ICONS: Record<string, LucideIcon> = {
   "right-sleeve": Ruler,
 }
 
-function isLightColor(hex: string) {
+export function isLightColor(hex: string) {
   const r = parseInt(hex.slice(1, 3), 16)
   const g = parseInt(hex.slice(3, 5), 16)
   const b = parseInt(hex.slice(5, 7), 16)
@@ -245,10 +245,22 @@ type ZoneContent =
   | ({ type: "text" } & TextStyle)
   | undefined
 
-export function ProductCustomizer({ garment }: { garment: Garment }) {
+export function ProductCustomizer({
+  garment,
+  initialColorId,
+  initialTierId,
+}: {
+  garment: Garment
+  initialColorId?: string
+  initialTierId?: string
+}) {
   const [activeZone, setActiveZone] = useState(garment.printZones[0]?.id)
-  const [tierId, setTierId] = useState(garment.pricingTiers[0]?.id)
-  const [colorId, setColorId] = useState(garment.colors[0]?.id)
+  const [tierId, setTierId] = useState(
+    garment.pricingTiers.find((t) => t.id === initialTierId)?.id ?? garment.pricingTiers[0]?.id
+  )
+  const [colorId, setColorId] = useState(
+    garment.colors.find((c) => c.id === initialColorId)?.id ?? garment.colors[0]?.id
+  )
   const [colorModalOpen, setColorModalOpen] = useState(false)
   const [quantities, setQuantities] = useState<Record<string, number>>(() =>
     Object.fromEntries(garment.sizes.map((size) => [size.id, size.defaultQty]))
@@ -706,7 +718,7 @@ export function ProductCustomizer({ garment }: { garment: Garment }) {
   )
 }
 
-function ColorPickerDialog({
+export function ColorPickerDialog({
   garment,
   open,
   onOpenChange,

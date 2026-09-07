@@ -17,6 +17,7 @@ export function ProductCard({ product }: { product: Product }) {
             className="size-full object-cover transition-transform group-hover:scale-105"
           />
         )}
+        <h1></h1>
       </div>
       <div>
         <p className="line-clamp-1 text-sm font-medium">{product.name}</p>

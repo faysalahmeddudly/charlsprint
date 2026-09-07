@@ -25,6 +25,13 @@ export interface GarmentPrintZone {
   status: "Applied" | "Empty"
 }
 
+export interface GarmentSizeChartRow {
+  size: string
+  length: number
+  width: number
+  sleeve: number
+}
+
 export interface Garment extends Product {
   sku: string
   fabric: string
@@ -35,6 +42,7 @@ export interface Garment extends Product {
   colors: GarmentColor[]
   sizes: GarmentSize[]
   pricingTiers: GarmentPricingTier[]
+  sizeChart?: GarmentSizeChartRow[]
 }
 
 export const garments: Garment[] = [
@@ -44,7 +52,8 @@ export const garments: Garment[] = [
     name: "AS Colour 5001 Staple",
     description:
       "180 GSM combed cotton tee with a standard retail fit. Built for full-colour DTG printing across the front chest, back body, and both sleeves.",
-    price: 23.1,
+    price: 18.9,
+    compareAtPrice: 24.0,
     currency: "USD",
     category: "T-Shirts",
     tags: ["staple", "bestseller", "dtg"],
@@ -102,6 +111,13 @@ export const garments: Garment[] = [
       { id: "sample", label: "Sample (1 pc)", minQty: 1, discountRate: 0 },
       { id: "team", label: "Team (25 pcs)", minQty: 25, discountRate: 0.08 },
       { id: "bulk", label: "Bulk Merch (50+)", minQty: 50, discountRate: 0.18 },
+    ],
+    sizeChart: [
+      { size: "S", length: 68, width: 52, sleeve: 60 },
+      { size: "M", length: 70, width: 55, sleeve: 61 },
+      { size: "L", length: 72, width: 58, sleeve: 62 },
+      { size: "XL", length: 74, width: 62, sleeve: 63 },
+      { size: "XXL", length: 77, width: 65, sleeve: 65 },
     ],
   },
   {
