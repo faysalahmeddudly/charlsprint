@@ -84,8 +84,7 @@ export function ProductCustomizer({
   }
 
   return (
-    // eslint-disable-next-line react/jsx-no-comment-textnodes
-    <div className="grid grid-cols-2 gap-3.5">
+    <div className="mx-auto grid grid-cols-[1fr_426.67px] gap-3.5">
 
     {/* preview shirt  */}
       <div className="space-y-4 max-w-233">
@@ -151,7 +150,7 @@ export function ProductCustomizer({
           </div>
 
           <div
-            className="relative mx-auto aspect-square w-full max-w-xl transition-transform duration-200"
+            className="relative mx-auto aspect-square w-full transition-transform duration-200"
             style={{
               transform: inspect3D
                 ? `perspective(900px) rotateY(-18deg) scale(${zoom / 100})`

@@ -15,7 +15,7 @@ import {
 } from "@/components/shop/product-customizer.constants"
 import type { Garment } from "@/app/(public)/shop/_data"
 
-const SURFACE_CARD = "rounded-2xl bg-sky-50/70 p-4 dark:bg-sky-500/5"
+const SURFACE_CARD = "rounded-2xl bg-sky-50/70 p-4"
 
 export function ProductDetails({ garment }: { garment: Garment }) {
   const { addItem } = useCart()
