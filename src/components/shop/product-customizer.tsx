@@ -350,9 +350,7 @@ export function ProductCustomizer({
           </div>
         </section>
 
-
-
-<section className={`${SURFACE_CARD} space-y-2`}>
+        <section className={`${SURFACE_CARD} space-y-2`}>
           <div className="flex items-center justify-between">
             <p className="font-plus-jakarta-sans text-xs font-semibold tracking-wide text-muted-foreground">
               SECTION C // GARMENT HUE
@@ -396,7 +394,6 @@ export function ProductCustomizer({
             ))}
           </div>
         </section>
-        
 
         <section className={`${SURFACE_CARD} space-y-2`}>
           <div className="mb-3 flex items-center justify-between">
@@ -463,8 +460,6 @@ export function ProductCustomizer({
           </div>
         </section>
 
-
-
         <section className={`${SURFACE_CARD} space-y-2`}>
           <div className="mb-3 flex items-center  justify-between">
             <p className="font-plus-jakarta-sans text-xs font-semibold tracking-wide text-muted-foreground">
@@ -521,35 +516,39 @@ export function ProductCustomizer({
           </div>
         </section>
 
-
-
-
-        
-
-       
-
         <section className={`${SURFACE_CARD} space-y-2`}>
           <div className="space-y-2 text-sm">
             <div className="flex items-center justify-between">
               <span className="text-muted-foreground">
                 Garment Base ({totalUnits} pcs)
               </span>
-              <span>{currency(subtotal)}</span>
+
+              <p className="text-[13px] leading-4 font-semibold tracking-[0.13px] text-[#0B1C30] font-inter">
+                $1,555.00
+              </p>
             </div>
+
             <div className="flex items-center justify-between">
               <span className="text-muted-foreground">
                 Front Print (Full Color DTG)
               </span>
-              <span>{zoneContent["front-chest"] ? "Included" : "—"}</span>
+              <p className="text-[13px] leading-4 font-semibold tracking-[0.13px] text-[#0B1C30] ">
+                Included
+              </p>
             </div>
-            {discount > 0 && (
-              <div className="flex items-center justify-between text-emerald-600">
-                <span className="font-medium">Discount</span>
-                <span className="font-medium">-{currency(discount)}</span>
-              </div>
-            )}
+
+            <div className="flex items-center justify-between text-emerald-600">
+              <span className="text-[13px] leading-4 font-semibold tracking-[0.13px] text-[#007642] font-inter">
+                Discount
+              </span>
+              <span className="text-base leading-4 font-semibold tracking-[0.13px] text-[#007642] font-inter">
+                -{currency(discount)}
+              </span>
+            </div>
+
           </div>
-          <div className="mt-3 flex items-end justify-between border-t border-border pt-3">
+
+          <div className="mt-3 flex items-end justify-between  pt-3">
             <div>
               <p className="text-xs text-muted-foreground">
                 Total (ex. shipping):
@@ -568,11 +567,6 @@ export function ProductCustomizer({
 
 
 
-
-
-
-
-
         <div className="flex gap-3">
           <Button variant="secondary" className="flex-1" size="lg">
             Save Draft
@@ -585,6 +579,7 @@ export function ProductCustomizer({
             Order Now →
           </Button>
         </div>
+
       </div>
 
       <ColorPickerDialog
