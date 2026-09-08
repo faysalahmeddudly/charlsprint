@@ -1,4 +1,4 @@
-import Link from "next/link";
+
 import { ShoppingCart } from "lucide-react";
 
 export function Navbar() {
@@ -24,11 +24,9 @@ export function Navbar() {
               380 648
             </div>
 
-            <div>
+            <div className="">
+Sign Up & Get 10% Off Your First Bulk Order!
 
-
-
-              
             </div>
 
             <div> </div>
