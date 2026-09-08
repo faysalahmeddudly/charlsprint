@@ -355,23 +355,30 @@ export function ProductCustomizer({
               SECTION B // SIZE DISTRIBUTION
             </p>
           </div>
-          <div className="mb-3 grid grid-cols-3 gap-2">
-            {garment.pricingTiers.map((t) => (
-              <button
-                key={t.id}
-                type="button"
-                onClick={() => setTierId(t.id)}
-                className={cn(
-                  "rounded-md px-2 py-2 text-[13px] leading-4 font-semibold tracking-[0.13px] transition-colors",
-                  t.id === tier.id
-                    ? "bg-destructive text-white"
-                    : "bg-background text-muted-foreground hover:bg-background/70",
-                )}
-              >
-                {t.label}
-              </button>
-            ))}
-          </div>
+
+
+
+       <div className="grid grid-cols-3 gap-2">
+  {garment.pricingTiers.map((t) => (
+    <button
+      key={t.id}
+      type="button"
+      onClick={() => setTierId(t.id)}
+      className={cn(
+        "h-[47px] rounded-[2px] px-2 py-1 text-[11px] leading-[14px] font-semibold tracking-[0.44px] font-inter transition-colors flex items-center justify-center",
+        t.id === tier.id
+          ? "bg-destructive text-white shadow-[0_1px_2px_0_#0000000D]"
+          : "bg-[#E5EEFF] text-[#0B1C30] hover:bg-[#E5EEFF]/70",
+      )}
+    >
+      {t.label}
+    </button>
+  ))}
+</div>
+
+
+
+
           <div className="grid grid-cols-7 gap-1.5">
             {garment.sizes.map((size) => (
               <div key={size.id} className="space-y-1 text-center">
