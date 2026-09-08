@@ -3,15 +3,16 @@ import clsx from "clsx";
 
 export const LogoComp = ({
   className,
-  width = 120,
-  height = 40,
+  width = 183,
+  height = 62,
   alt = "Logo",
   priority = false,
+  src="/logo.png",
   ...rest
 }) => {
   return (
     <Image
-      src="/logo.png"
+      src={src}
       alt={alt}
       width={width}
       height={height}
