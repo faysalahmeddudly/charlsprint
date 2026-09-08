@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { cn } from "cn";
 import { Button } from "@/components/ui/button";
+import { EmbroideryIcon } from "@/components/icons/embroidery-icon";
 import type { Garment } from "@/app/(public)/shop/_data";
 import {
   currency,
@@ -300,7 +301,7 @@ export function ProductCustomizer({
       {/* sidebar  */}
 
       <div className="max-w-[426.67px] space-y-3">
-        <section className={SURFACE_CARD}>
+        <section className={`${SURFACE_CARD} space-y-2`}>
           <div className=" flex items-center justify-between">
             <p className="font-plus-jakarta-sans text-xs font-semibold tracking-wide text-muted-foreground">
               SECTION A // GARMENT MODEL
@@ -349,95 +350,28 @@ export function ProductCustomizer({
           </div>
         </section>
 
-        <section className={SURFACE_CARD}>
-          <div className="mb-3 flex items-center justify-between">
-            <p className="font-plus-jakarta-sans text-xs font-semibold tracking-wide text-muted-foreground">
-              SECTION B // SIZE DISTRIBUTION
-            </p>
-          </div>
 
 
-
-       <div className="grid grid-cols-3 gap-2">
-  {garment.pricingTiers.map((t) => (
-    <button
-      key={t.id}
-      type="button"
-      onClick={() => setTierId(t.id)}
-      className={cn(
-        "h-[47px] rounded-[2px] px-2 py-1 text-[11px] leading-[14px] font-semibold tracking-[0.44px] font-inter transition-colors flex items-center justify-center",
-        t.id === tier.id
-          ? "bg-destructive text-white shadow-[0_1px_2px_0_#0000000D]"
-          : "bg-[#E5EEFF] text-[#0B1C30] hover:bg-[#E5EEFF]/70",
-      )}
-    >
-      {t.label}
-    </button>
-  ))}
-</div>
-
-
-
-
-          <div className="grid grid-cols-7 gap-1.5">
-            {garment.sizes.map((size) => (
-              <div key={size.id} className="space-y-1 text-center">
-                <p className="text-[11px] leading-[14px] font-semibold tracking-[0.44px] text-muted-foreground">
-                  {size.label}
-                </p>
-                <input
-                  type="number"
-                  min={0}
-                  value={quantities[size.id]}
-                  onChange={(e) => setQty(size.id, Number(e.target.value))}
-                  className="h-8 w-full rounded-md border border-input bg-transparent text-center text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50"
-                />
-              </div>
-            ))}
-          </div>
-          <div className="mt-3 flex items-center justify-between border-t border-border pt-3">
-            <span className="text-xs text-muted-foreground">
-              Aggregate Batch Run:
-            </span>
-            <span className="text-lg font-semibold text-destructive">
-              {totalUnits}{" "}
-              <span className="text-xs font-medium text-foreground">
-                units total
-              </span>
-            </span>
-          </div>
-        </section>
-
-
-
-
-
-
-
-
-
-
-
-        
-
-        <section className={SURFACE_CARD}>
-          <div className="mb-3 flex items-center justify-between">
+<section className={`${SURFACE_CARD} space-y-2`}>
+          <div className="flex items-center justify-between">
             <p className="font-plus-jakarta-sans text-xs font-semibold tracking-wide text-muted-foreground">
               SECTION C // GARMENT HUE
             </p>
+
             {garment.colors.length > VISIBLE_COLOR_COUNT && (
               <Button
                 type="button"
                 variant="outline"
                 size="sm"
                 onClick={() => setColorModalOpen(true)}
-                className="rounded-sm border-none bg-background px-2 py-1 text-[13px] leading-4 font-semibold tracking-[0.13px] text-destructive hover:bg-background/70"
+                className=" border-none bg-transparent  text-base  font-semibold tracking-[-0.16px] text-[#DC2626] hover:bg-transparent/70 font-plus-jakarta-sans"
               >
                 See More
               </Button>
             )}
           </div>
-          <div className="flex flex-nowrap gap-2 overflow-hidden">
+
+          <div className="flex justify-between flex-nowrap gap-2 overflow-hidden">
             {garment.colors.slice(0, VISIBLE_COLOR_COUNT).map((color) => (
               <button
                 key={color.id}
@@ -445,10 +379,8 @@ export function ProductCustomizer({
                 title={color.name}
                 onClick={() => setColorId(color.id)}
                 className={cn(
-                  "flex size-9 shrink-0 items-center justify-center rounded-md border transition-shadow",
-                  color.id === colorId
-                    ? "border-foreground ring-2 ring-offset-1 ring-foreground/40"
-                    : "border-border",
+                  "flex size-[42px] shrink-0 items-center justify-center rounded-xl border shadow-[0_1px_2px_0_#0000000D] transition-shadow",
+                  color.id === colorId ? "border-foreground" : "border-border",
                 )}
                 style={{ backgroundColor: color.swatch }}
               >
@@ -464,47 +396,139 @@ export function ProductCustomizer({
             ))}
           </div>
         </section>
+        
 
-        <section className={SURFACE_CARD}>
+        <section className={`${SURFACE_CARD} space-y-2`}>
           <div className="mb-3 flex items-center justify-between">
             <p className="font-plus-jakarta-sans text-xs font-semibold tracking-wide text-muted-foreground">
               SELECT VECTOR &amp; GRAPHICS ASSETS
             </p>
+
+            <svg
+              width="14"
+              height="15"
+              viewBox="0 0 14 15"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M6.75 14.2875L0 9.0375L1.2375 8.1L6.75 12.375L12.2625 8.1L13.5 9.0375L6.75 14.2875ZM6.75 10.5L0 5.25L6.75 0L13.5 5.25L6.75 10.5ZM6.75 8.5875L11.0625 5.25L6.75 1.9125L2.4375 5.25L6.75 8.5875Z"
+                fill="#565E74"
+              />
+            </svg>
           </div>
+
           <div className="flex flex-col gap-3">
-            <button
-              type="button"
-              onClick={() => {
-                setGraphicsModalTab("graphics");
-                setGraphicsModalOpen(true);
-              }}
-              className="flex flex-col items-center gap-2 rounded-xl bg-background py-6 text-[13px] leading-4 font-semibold tracking-[0.13px] text-destructive shadow-sm transition-colors hover:bg-background/70"
-            >
-              <PaletteIcon className="size-5" />
-              Graphics
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                setGraphicsModalTab("text");
-                setGraphicsModalOpen(true);
-              }}
-              className="flex flex-col items-center gap-2 rounded-xl bg-background py-6 text-[13px] leading-4 font-semibold tracking-[0.13px] text-foreground shadow-sm transition-colors hover:bg-background/70"
-            >
-              <TypeIcon className="size-5" />
-              Text
-            </button>
+            <div className="pt-1 pb-1">
+              <button
+                type="button"
+                onClick={() => {
+                  setGraphicsModalTab("graphics");
+                  setGraphicsModalOpen(true);
+                }}
+                className="flex w-full flex-col items-center justify-center gap-3 rounded bg-background py-[18px] text-center text-[11px] leading-[14px] font-semibold tracking-[0.44px] text-destructive shadow-[0_1px_2px_0_#0000000D] transition-colors hover:bg-background/70"
+              >
+                <PaletteIcon className="size-5" />
+                Graphics
+              </button>
+            </div>
+
+            <div className="pt-1 pb-1">
+              <button
+                type="button"
+                onClick={() => {
+                  setGraphicsModalTab("graphics");
+                  setGraphicsModalOpen(true);
+                }}
+                className="flex w-full flex-col items-center justify-center gap-3 rounded bg-background py-[18px] text-center text-[11px] leading-[14px] font-semibold tracking-[0.44px] text-[#000000] shadow-[0_1px_2px_0_#0000000D] transition-colors hover:bg-background/70"
+              >
+                <EmbroideryIcon className="size-5" />
+                Embroidery Design
+              </button>
+            </div>
+
+            <div className="pt-1 pb-1">
+              <button
+                type="button"
+                onClick={() => {
+                  setGraphicsModalTab("text");
+                  setGraphicsModalOpen(true);
+                }}
+                className="flex w-full flex-col items-center justify-center gap-3 rounded bg-background py-[18px] text-center text-[11px] leading-[14px] font-semibold tracking-[0.44px] text-foreground shadow-[0_1px_2px_0_#0000000D] transition-colors hover:bg-background/70"
+              >
+                <TypeIcon className="size-5" />
+                Text
+              </button>
+            </div>
           </div>
         </section>
 
-        <section className={SURFACE_CARD}>
-          <p className="text-sm font-semibold">Instant Quote</p>
-          <p className="text-xs text-muted-foreground">
-            Transparent commercial tier pricing
-          </p>
+
+
+        <section className={`${SURFACE_CARD} space-y-2`}>
+          <div className="mb-3 flex items-center  justify-between">
+            <p className="font-plus-jakarta-sans text-xs font-semibold tracking-wide text-muted-foreground">
+              SECTION B // SIZE DISTRIBUTION
+            </p>
+          </div>
+
+          <div className="grid  grid-cols-3 gap-2">
+            {garment.pricingTiers.map((t) => (
+              <button
+                key={t.id}
+                type="button"
+                onClick={() => setTierId(t.id)}
+                className={cn(
+                  "h-[47px] rounded-[2px] px-2 py-1 text-[11px] leading-[14px] font-semibold tracking-[0.44px] transition-colors flex items-center justify-center",
+                  t.id === tier.id
+                    ? "bg-destructive text-white shadow-[0_1px_2px_0_#0000000D]"
+                    : "bg-[#E5EEFF] text-[#0B1C30] hover:bg-[#E5EEFF]/70",
+                )}
+              >
+                {t.label}
+              </button>
+            ))}
+          </div>
+
+          <div className="grid grid-cols-7 gap-1.5">
+            {garment.sizes.map((size) => (
+              <div key={size.id} className="space-y-1 text-center">
+                <p className="text-[11px] leading-[14px] font-semibold tracking-[0.44px] text-muted-foreground">
+                  {size.label}
+                </p>
+                <input
+                  type="number"
+                  min={0}
+                  value={quantities[size.id]}
+                  onChange={(e) => setQty(size.id, Number(e.target.value))}
+                  className=" w-full py-[7.5px] rounded-[2px]  bg-white text-center text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50"
+                />
+              </div>
+            ))}
+          </div>
+
+          <div className=" flex items-center justify-between  pt-3">
+            <span className="text-xs text-muted-foreground">
+              Aggregate Batch Run:
+            </span>
+
+            <span className="text-2xl font-extrabold text-[#DC2626]">
+              {totalUnits}{" "}
+              <span className="text-[11px] leading-[14px] font-semibold tracking-[0.44px] text-muted-foreground uppercase">
+                units total
+              </span>
+            </span>
+          </div>
         </section>
 
-        <section className={SURFACE_CARD}>
+
+
+
+        
+
+       
+
+        <section className={`${SURFACE_CARD} space-y-2`}>
           <div className="space-y-2 text-sm">
             <div className="flex items-center justify-between">
               <span className="text-muted-foreground">
@@ -539,6 +563,15 @@ export function ProductCustomizer({
             </p>
           </div>
         </section>
+
+
+
+
+
+
+
+
+
 
         <div className="flex gap-3">
           <Button variant="secondary" className="flex-1" size="lg">
