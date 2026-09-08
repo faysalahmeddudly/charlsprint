@@ -8,7 +8,12 @@ const navLinks = [
   { href: "/order-tracking", label: "Track Order" },
 ]
 
-export function SiteHeader() {
+export function Navbar() {
+
+
+
+
+  
   return (
     <header className="border-b border-border">
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4">
