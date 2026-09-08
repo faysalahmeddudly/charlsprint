@@ -87,8 +87,8 @@ export function ProductCustomizer({
     <div className="mx-auto grid grid-cols-[1fr_426.67px] gap-3.5">
 
     {/* preview shirt  */}
-      <div className="space-y-4 max-w-233">
-        <div className="flex flex-wrap gap-2">
+      <div className="max-w-233 space-y-[34px]">
+        <div className="flex flex-nowrap gap-2 bg-white px-6 py-1 shadow-sm">
           {garment.printZones.map((zone) => {
             const applied = Boolean(zoneContent[zone.id])
             const Icon = ZONE_ICONS[zone.id] ?? Shirt
@@ -99,10 +99,11 @@ export function ProductCustomizer({
                 type="button"
                 onClick={() => setActiveZone(zone.id)}
                 className={cn(
-                  "flex flex-1 items-center justify-between gap-2 rounded-xl border px-3 py-2.5 text-left text-sm transition-colors",
+                  "flex min-w-0 flex-1 items-center justify-between rounded px-3 py-1 text-left text-sm transition-colors",
+                  active ? "gap-[9px]" : "gap-1",
                   active
                     ? "border-transparent bg-destructive text-white shadow-sm"
-                    : "border-border bg-card hover:bg-muted"
+                    : "border-border bg-[#EFF4FF] hover:bg-muted"
                 )}
               >
                 <span className="flex min-w-0 items-center gap-2">
@@ -115,8 +116,8 @@ export function ProductCustomizer({
                   />
                   <span
                     className={cn(
-                      "truncate font-medium",
-                      active ? "font-plus-jakarta-sans" : "font-sans"
+                      "truncate font-inter text-[13px] font-semibold leading-4 tracking-[0.13px]",
+                      active ? "text-white" : "text-[#0B1C30]"
                     )}
                   >
                     {zone.label}
@@ -124,7 +125,7 @@ export function ProductCustomizer({
                 </span>
                 <span
                   className={cn(
-                    "shrink-0 rounded-md px-1.5 py-0.5 text-xs font-medium",
+                    "shrink-0 rounded-md px-1.5 py-0.5 font-inter text-[11px] font-semibold leading-[14px] tracking-[0.44px] text-center",
                     active
                       ? "bg-white/20 text-white"
                       : applied
@@ -139,7 +140,7 @@ export function ProductCustomizer({
           })}
         </div>
 
-        <div className="relative overflow-hidden rounded-lg border border-border bg-muted/40 p-8">
+        <div className="relative overflow-hidden rounded-lg  bg-muted/40 p-8">
           <div className="mb-4 flex flex-wrap items-center justify-between gap-2 text-xs text-muted-foreground">
             <span className="rounded bg-background/80 px-2 py-1 shadow-sm">
               Center Offset: X: 0.00 mm | Y: -45.2 mm
