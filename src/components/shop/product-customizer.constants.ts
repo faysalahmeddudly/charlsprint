@@ -19,7 +19,8 @@ export function currency(value: number) {
 
 export const VISIBLE_COLOR_COUNT = 8
 
-export const SURFACE_CARD = "rounded-2xl bg-sky-50/70 p-4"
+export const SURFACE_CARD =
+  "w-full h-fit flex flex-col gap-2 p-3 rounded-lg bg-card-secondary shadow-[0_1px_2px_0_#0000000D]"
 
 export const ZONE_ICONS: Record<string, LucideIcon> = {
   "front-chest": Shirt,

@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { useMemo, useState } from "react"
-import Image from "next/image"
+import { useMemo, useState } from "react";
+import Image from "next/image";
 import {
   Box,
   CheckIcon,
@@ -12,10 +12,10 @@ import {
   PlusIcon,
   Shirt,
   TypeIcon,
-} from "lucide-react"
-import { cn } from "cn"
-import { Button } from "@/components/ui/button"
-import type { Garment } from "@/app/(public)/shop/_data"
+} from "lucide-react";
+import { cn } from "cn";
+import { Button } from "@/components/ui/button";
+import type { Garment } from "@/app/(public)/shop/_data";
 import {
   currency,
   VISIBLE_COLOR_COUNT,
@@ -25,85 +25,94 @@ import {
   GRAPHIC_ASSETS,
   TEXT_FONTS,
   type ZoneContent,
-} from "./product-customizer.constants"
-import { ColorPickerDialog } from "./color-picker-dialog"
-import { GraphicsLibraryDialog } from "./graphics-library-dialog"
+} from "./product-customizer.constants";
+import { ColorPickerDialog } from "./color-picker-dialog";
+import { GraphicsLibraryDialog } from "./graphics-library-dialog";
 
 export function ProductCustomizer({
   garment,
   initialColorId,
   initialTierId,
 }: {
-  garment: Garment
-  initialColorId?: string
-  initialTierId?: string
+  garment: Garment;
+  initialColorId?: string;
+  initialTierId?: string;
 }) {
-  const [activeZone, setActiveZone] = useState(garment.printZones[0]?.id)
+  const [activeZone, setActiveZone] = useState(garment.printZones[0]?.id);
   const [tierId, setTierId] = useState(
-    garment.pricingTiers.find((t) => t.id === initialTierId)?.id ?? garment.pricingTiers[0]?.id
-  )
+    garment.pricingTiers.find((t) => t.id === initialTierId)?.id ??
+      garment.pricingTiers[0]?.id,
+  );
   const [colorId, setColorId] = useState(
-    garment.colors.find((c) => c.id === initialColorId)?.id ?? garment.colors[0]?.id
-  )
-  const [colorModalOpen, setColorModalOpen] = useState(false)
+    garment.colors.find((c) => c.id === initialColorId)?.id ??
+      garment.colors[0]?.id,
+  );
+  const [colorModalOpen, setColorModalOpen] = useState(false);
   const [quantities, setQuantities] = useState<Record<string, number>>(() =>
-    Object.fromEntries(garment.sizes.map((size) => [size.id, size.defaultQty]))
-  )
-  const [zoneContent, setZoneContent] = useState<Record<string, ZoneContent>>(() =>
-    Object.fromEntries(
-      garment.printZones.map((zone) => [
-        zone.id,
-        zone.status === "Applied" ? { type: "graphic", assetId: "skull" } : undefined,
-      ])
-    )
-  )
-  const [graphicsModalOpen, setGraphicsModalOpen] = useState(false)
-  const [graphicsModalTab, setGraphicsModalTab] = useState<"graphics" | "text">("graphics")
-  const [zoom, setZoom] = useState(100)
-  const [inspect3D, setInspect3D] = useState(false)
+    Object.fromEntries(garment.sizes.map((size) => [size.id, size.defaultQty])),
+  );
+  const [zoneContent, setZoneContent] = useState<Record<string, ZoneContent>>(
+    () =>
+      Object.fromEntries(
+        garment.printZones.map((zone) => [
+          zone.id,
+          zone.status === "Applied"
+            ? { type: "graphic", assetId: "skull" }
+            : undefined,
+        ]),
+      ),
+  );
+  const [graphicsModalOpen, setGraphicsModalOpen] = useState(false);
+  const [graphicsModalTab, setGraphicsModalTab] = useState<"graphics" | "text">(
+    "graphics",
+  );
+  const [zoom, setZoom] = useState(100);
+  const [inspect3D, setInspect3D] = useState(false);
 
   function zoomBy(delta: number) {
-    setZoom((prev) => Math.min(200, Math.max(50, prev + delta)))
+    setZoom((prev) => Math.min(200, Math.max(50, prev + delta)));
   }
 
-  const tier = garment.pricingTiers.find((t) => t.id === tierId) ?? garment.pricingTiers[0]
-  const image = garment.images[0]
+  const tier =
+    garment.pricingTiers.find((t) => t.id === tierId) ??
+    garment.pricingTiers[0];
+  const image = garment.images[0];
 
   const totalUnits = useMemo(
     () => Object.values(quantities).reduce((sum, qty) => sum + qty, 0),
-    [quantities]
-  )
+    [quantities],
+  );
 
-  const subtotal = totalUnits * garment.basePricePerUnit
-  const discount = subtotal * tier.discountRate
-  const total = subtotal - discount
-  const perUnit = totalUnits > 0 ? total / totalUnits : 0
+  const subtotal = totalUnits * garment.basePricePerUnit;
+  const discount = subtotal * tier.discountRate;
+  const total = subtotal - discount;
+  const perUnit = totalUnits > 0 ? total / totalUnits : 0;
 
   function setQty(sizeId: string, value: number) {
-    setQuantities((prev) => ({ ...prev, [sizeId]: Math.max(0, value) }))
+    setQuantities((prev) => ({ ...prev, [sizeId]: Math.max(0, value) }));
   }
 
   return (
     <div className="mx-auto grid grid-cols-[1fr_426.67px] gap-3.5">
-
-    {/* preview shirt  */}
+      {/* preview shirt  */}
       <div className="max-w-233 space-y-[34px]">
         <div className="flex flex-nowrap gap-2 bg-white px-6 py-1 shadow-sm">
           {garment.printZones.map((zone) => {
-            const applied = Boolean(zoneContent[zone.id])
-            const Icon = ZONE_ICONS[zone.id] ?? Shirt
-            const active = zone.id === activeZone
+            const applied = Boolean(zoneContent[zone.id]);
+            const Icon = ZONE_ICONS[zone.id] ?? Shirt;
+            const active = zone.id === activeZone;
             return (
-              <button
+              <Button
                 key={zone.id}
                 type="button"
+                variant="ghost"
                 onClick={() => setActiveZone(zone.id)}
                 className={cn(
-                  "flex min-w-0 flex-1 items-center justify-between rounded px-3 py-1 text-left text-sm transition-colors",
+                  "h-auto min-w-0 flex-1 justify-between rounded px-3 py-2 text-left text-sm font-normal transition-colors",
                   active ? "gap-[9px]" : "gap-1",
                   active
-                    ? "border-transparent bg-destructive text-white shadow-sm"
-                    : "border-border bg-[#EFF4FF] hover:bg-muted"
+                    ? "border-transparent bg-destructive text-white shadow-sm hover:bg-destructive"
+                    : "border-border bg-card-secondary hover:bg-muted",
                 )}
               >
                 <span className="flex min-w-0 items-center gap-2">
@@ -111,13 +120,13 @@ export function ProductCustomizer({
                     className={cn(
                       "size-4 shrink-0",
                       zone.id === "right-sleeve" && "-scale-x-100",
-                      active ? "text-white" : "text-muted-foreground"
+                      active ? "text-white" : "text-muted-foreground",
                     )}
                   />
                   <span
                     className={cn(
                       "truncate font-inter text-[13px] font-semibold leading-4 tracking-[0.13px]",
-                      active ? "text-white" : "text-[#0B1C30]"
+                      active ? "text-white" : "text-[#0B1C30]",
                     )}
                   >
                     {zone.label}
@@ -130,13 +139,13 @@ export function ProductCustomizer({
                       ? "bg-white/20 text-white"
                       : applied
                         ? "bg-destructive text-white"
-                        : "bg-muted text-muted-foreground"
+                        : "bg-muted text-muted-foreground",
                   )}
                 >
                   {applied ? "1 Applied" : "Empty"}
                 </span>
-              </button>
-            )
+              </Button>
+            );
           })}
         </div>
 
@@ -169,12 +178,12 @@ export function ProductCustomizer({
             )}
             {activeZone === "front-chest" &&
               (() => {
-                const content = zoneContent["front-chest"]
-                if (!content) return null
+                const content = zoneContent["front-chest"];
+                if (!content) return null;
                 const asset =
                   content.type === "graphic"
                     ? GRAPHIC_ASSETS.find((a) => a.id === content.assetId)
-                    : undefined
+                    : undefined;
                 return (
                   <div className="pointer-events-none absolute left-1/2 top-[38%] w-[42%] -translate-x-1/2 border-2 border-dashed border-destructive/70">
                     <span className="absolute -top-6 left-0 rounded bg-destructive px-1.5 py-0.5 text-[10px] font-semibold text-white">
@@ -192,16 +201,24 @@ export function ProductCustomizer({
                       {content.type === "text" && (
                         <div
                           className="flex flex-col items-center gap-1"
-                          style={{ transform: `skewY(${(content.curvature / 100) * -6}deg)` }}
+                          style={{
+                            transform: `skewY(${(content.curvature / 100) * -6}deg)`,
+                          }}
                         >
                           <p
                             className="break-words text-sm sm:text-base"
                             style={{
-                              fontFamily: TEXT_FONTS.find((f) => f.id === content.fontId)?.cssVar,
+                              fontFamily: TEXT_FONTS.find(
+                                (f) => f.id === content.fontId,
+                              )?.cssVar,
                               fontWeight: content.bold ? 700 : 400,
                               fontStyle: content.italic ? "italic" : "normal",
-                              textDecoration: content.underline ? "underline" : "none",
-                              textTransform: content.uppercase ? "uppercase" : "none",
+                              textDecoration: content.underline
+                                ? "underline"
+                                : "none",
+                              textTransform: content.uppercase
+                                ? "uppercase"
+                                : "none",
                               textAlign: content.align,
                               letterSpacing: `${content.letterSpacing}mm`,
                               color: content.color,
@@ -220,7 +237,7 @@ export function ProductCustomizer({
                       )}
                     </div>
                   </div>
-                )
+                );
               })()}
           </div>
 
@@ -268,7 +285,7 @@ export function ProductCustomizer({
                   "flex items-center gap-1.5 rounded-full px-2.5 py-1 text-sm font-medium transition-colors",
                   inspect3D
                     ? "bg-primary/10 text-primary"
-                    : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                    : "text-muted-foreground hover:bg-muted hover:text-foreground",
                 )}
                 aria-pressed={inspect3D}
               >
@@ -280,43 +297,52 @@ export function ProductCustomizer({
         </div>
       </div>
 
+      {/* sidebar  */}
 
-
-{/* sidebar  */}
-
-      <div className="max-w-[426.67px] space-y-4">
+      <div className="max-w-[426.67px] space-y-3">
         <section className={SURFACE_CARD}>
-          <div className="mb-3 flex items-center justify-between">
-            <p className="text-xs font-semibold tracking-wide text-muted-foreground">
+          <div className=" flex items-center justify-between">
+            <p className="font-plus-jakarta-sans text-xs font-semibold tracking-wide text-muted-foreground">
               SECTION A // GARMENT MODEL
             </p>
-            <span className="flex items-center gap-1 text-xs font-medium text-emerald-600">
-              <span className="size-1.5 rounded-full bg-emerald-500" />
+
+            <span className="flex items-center gap-1 text-[11px] font-semibold leading-[14px] tracking-[0.44px] text-[#006947]">
+              <span className="size-1.5 rounded-full bg-[#006947]" />
               In Stock ({garment.stockCount.toLocaleString()} pcs)
             </span>
           </div>
 
-
           <div className="flex items-center gap-3">
-            <div className="size-14 shrink-0 overflow-hidden rounded-md bg-muted">
+            <div className="w-[68px] h-[76px] border border-[#000116] rounded-md shrink-0 overflow-hidden bg-muted">
               {image && (
                 <Image
                   src={image.url}
                   alt={image.alt}
-                  width={56}
-                  height={56}
+                  width={68}
+                  height={76}
                   className="size-full object-cover"
                 />
               )}
             </div>
+
             <div className="min-w-0 flex-1">
-              <p className="truncate text-sm font-semibold">{garment.name}</p>
-              <p className="text-xs text-muted-foreground">
+              <p className="truncate text-base leading-6 font-semibold tracking-[-0.16px] text-[#0B1C30] font-plus-jakarta-sans">
+                {garment.name}
+              </p>
+
+              <p className="text-xs leading-[18px] font-normal text-[#565E74]">
                 {garment.fabric} • {garment.fit}
               </p>
-              <p className="text-xs font-medium text-destructive">SKU: {garment.sku}</p>
+
+              <p className="text-[11px] leading-[14px] font-semibold tracking-[0.44px] text-[#DC2626]">
+                SKU: {garment.sku}
+              </p>
             </div>
-            <Button variant="outline" size="sm">
+            <Button
+              variant="outline"
+              size="sm"
+              className="gap-[4.01px] rounded-sm border-none bg-[#E5EEFF] px-2 py-1 hover:bg-[#E5EEFF]/80 text-[13px] leading-4 font-semibold tracking-[0.13px] text-[#0B1C30]"
+            >
               Change
               <ChevronDownIcon />
             </Button>
@@ -324,9 +350,11 @@ export function ProductCustomizer({
         </section>
 
         <section className={SURFACE_CARD}>
-          <p className="mb-3 text-xs font-semibold tracking-wide text-muted-foreground">
-            SECTION B // SIZE DISTRIBUTION
-          </p>
+          <div className="mb-3 flex items-center justify-between">
+            <p className="font-plus-jakarta-sans text-xs font-semibold tracking-wide text-muted-foreground">
+              SECTION B // SIZE DISTRIBUTION
+            </p>
+          </div>
           <div className="mb-3 grid grid-cols-3 gap-2">
             {garment.pricingTiers.map((t) => (
               <button
@@ -334,10 +362,10 @@ export function ProductCustomizer({
                 type="button"
                 onClick={() => setTierId(t.id)}
                 className={cn(
-                  "rounded-md px-2 py-2 text-xs font-medium transition-colors",
+                  "rounded-md px-2 py-2 text-[13px] leading-4 font-semibold tracking-[0.13px] transition-colors",
                   t.id === tier.id
                     ? "bg-destructive text-white"
-                    : "bg-background text-muted-foreground hover:bg-background/70"
+                    : "bg-background text-muted-foreground hover:bg-background/70",
                 )}
               >
                 {t.label}
@@ -347,7 +375,9 @@ export function ProductCustomizer({
           <div className="grid grid-cols-7 gap-1.5">
             {garment.sizes.map((size) => (
               <div key={size.id} className="space-y-1 text-center">
-                <p className="text-[11px] text-muted-foreground">{size.label}</p>
+                <p className="text-[11px] leading-[14px] font-semibold tracking-[0.44px] text-muted-foreground">
+                  {size.label}
+                </p>
                 <input
                   type="number"
                   min={0}
@@ -359,26 +389,45 @@ export function ProductCustomizer({
             ))}
           </div>
           <div className="mt-3 flex items-center justify-between border-t border-border pt-3">
-            <span className="text-xs text-muted-foreground">Aggregate Batch Run:</span>
+            <span className="text-xs text-muted-foreground">
+              Aggregate Batch Run:
+            </span>
             <span className="text-lg font-semibold text-destructive">
-              {totalUnits} <span className="text-xs font-medium text-foreground">units total</span>
+              {totalUnits}{" "}
+              <span className="text-xs font-medium text-foreground">
+                units total
+              </span>
             </span>
           </div>
         </section>
 
+
+
+
+
+
+
+
+
+
+
+        
+
         <section className={SURFACE_CARD}>
           <div className="mb-3 flex items-center justify-between">
-            <p className="text-xs font-semibold tracking-wide text-muted-foreground">
+            <p className="font-plus-jakarta-sans text-xs font-semibold tracking-wide text-muted-foreground">
               SECTION C // GARMENT HUE
             </p>
             {garment.colors.length > VISIBLE_COLOR_COUNT && (
-              <button
+              <Button
                 type="button"
+                variant="outline"
+                size="sm"
                 onClick={() => setColorModalOpen(true)}
-                className="text-xs font-medium text-destructive"
+                className="rounded-sm border-none bg-background px-2 py-1 text-[13px] leading-4 font-semibold tracking-[0.13px] text-destructive hover:bg-background/70"
               >
                 See More
-              </button>
+              </Button>
             )}
           </div>
           <div className="flex flex-nowrap gap-2 overflow-hidden">
@@ -392,14 +441,16 @@ export function ProductCustomizer({
                   "flex size-9 shrink-0 items-center justify-center rounded-md border transition-shadow",
                   color.id === colorId
                     ? "border-foreground ring-2 ring-offset-1 ring-foreground/40"
-                    : "border-border"
+                    : "border-border",
                 )}
                 style={{ backgroundColor: color.swatch }}
               >
                 {color.id === colorId && (
                   <CheckIcon
                     className="size-4"
-                    style={{ color: isLightColor(color.swatch) ? "#111" : "#fff" }}
+                    style={{
+                      color: isLightColor(color.swatch) ? "#111" : "#fff",
+                    }}
                   />
                 )}
               </button>
@@ -408,17 +459,19 @@ export function ProductCustomizer({
         </section>
 
         <section className={SURFACE_CARD}>
-          <p className="mb-3 text-xs font-semibold tracking-wide text-muted-foreground">
-            SELECT VECTOR &amp; GRAPHICS ASSETS
-          </p>
+          <div className="mb-3 flex items-center justify-between">
+            <p className="font-plus-jakarta-sans text-xs font-semibold tracking-wide text-muted-foreground">
+              SELECT VECTOR &amp; GRAPHICS ASSETS
+            </p>
+          </div>
           <div className="flex flex-col gap-3">
             <button
               type="button"
               onClick={() => {
-                setGraphicsModalTab("graphics")
-                setGraphicsModalOpen(true)
+                setGraphicsModalTab("graphics");
+                setGraphicsModalOpen(true);
               }}
-              className="flex flex-col items-center gap-2 rounded-xl bg-background py-6 text-sm font-medium text-destructive shadow-sm transition-colors hover:bg-background/70"
+              className="flex flex-col items-center gap-2 rounded-xl bg-background py-6 text-[13px] leading-4 font-semibold tracking-[0.13px] text-destructive shadow-sm transition-colors hover:bg-background/70"
             >
               <PaletteIcon className="size-5" />
               Graphics
@@ -426,10 +479,10 @@ export function ProductCustomizer({
             <button
               type="button"
               onClick={() => {
-                setGraphicsModalTab("text")
-                setGraphicsModalOpen(true)
+                setGraphicsModalTab("text");
+                setGraphicsModalOpen(true);
               }}
-              className="flex flex-col items-center gap-2 rounded-xl bg-background py-6 text-sm font-medium text-foreground shadow-sm transition-colors hover:bg-background/70"
+              className="flex flex-col items-center gap-2 rounded-xl bg-background py-6 text-[13px] leading-4 font-semibold tracking-[0.13px] text-foreground shadow-sm transition-colors hover:bg-background/70"
             >
               <TypeIcon className="size-5" />
               Text
@@ -439,17 +492,23 @@ export function ProductCustomizer({
 
         <section className={SURFACE_CARD}>
           <p className="text-sm font-semibold">Instant Quote</p>
-          <p className="text-xs text-muted-foreground">Transparent commercial tier pricing</p>
+          <p className="text-xs text-muted-foreground">
+            Transparent commercial tier pricing
+          </p>
         </section>
 
         <section className={SURFACE_CARD}>
           <div className="space-y-2 text-sm">
             <div className="flex items-center justify-between">
-              <span className="text-muted-foreground">Garment Base ({totalUnits} pcs)</span>
+              <span className="text-muted-foreground">
+                Garment Base ({totalUnits} pcs)
+              </span>
               <span>{currency(subtotal)}</span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-muted-foreground">Front Print (Full Color DTG)</span>
+              <span className="text-muted-foreground">
+                Front Print (Full Color DTG)
+              </span>
               <span>{zoneContent["front-chest"] ? "Included" : "—"}</span>
             </div>
             {discount > 0 && (
@@ -461,12 +520,16 @@ export function ProductCustomizer({
           </div>
           <div className="mt-3 flex items-end justify-between border-t border-border pt-3">
             <div>
-              <p className="text-xs text-muted-foreground">Total (ex. shipping):</p>
+              <p className="text-xs text-muted-foreground">
+                Total (ex. shipping):
+              </p>
               <p className="text-[11px] text-muted-foreground">
                 USD ({currency(perUnit)} / unit)
               </p>
             </div>
-            <p className="text-2xl font-bold text-destructive">{currency(total)}</p>
+            <p className="text-2xl font-bold text-destructive">
+              {currency(total)}
+            </p>
           </div>
         </section>
 
@@ -499,13 +562,19 @@ export function ProductCustomizer({
         appliedContent={activeZone ? zoneContent[activeZone] : undefined}
         onApplyGraphic={(assetId) =>
           activeZone &&
-          setZoneContent((prev) => ({ ...prev, [activeZone]: { type: "graphic", assetId } }))
+          setZoneContent((prev) => ({
+            ...prev,
+            [activeZone]: { type: "graphic", assetId },
+          }))
         }
         onApplyText={(style) =>
           activeZone &&
-          setZoneContent((prev) => ({ ...prev, [activeZone]: { type: "text", ...style } }))
+          setZoneContent((prev) => ({
+            ...prev,
+            [activeZone]: { type: "text", ...style },
+          }))
         }
       />
     </div>
-  )
+  );
 }
