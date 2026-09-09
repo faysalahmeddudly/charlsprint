@@ -29,9 +29,3 @@ export interface Order {
   estimatedDelivery?: string
 }
 
-export interface OrderTrackingEvent {
-  status: OrderStatus
-  label: string
-  timestamp: string
-  location?: string
-}
