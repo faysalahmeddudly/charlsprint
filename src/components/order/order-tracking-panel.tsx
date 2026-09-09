@@ -5,9 +5,13 @@ import LogoComp from "@/components/shared/logoComp";
 import { orderTrackingSchema, type OrderTrackingInput } from "@/lib/validations/order-tracking";
 import { orderService } from "@/services/order.service";
 import { ApiClientError } from "@/services/api-client";
+import { formatOrderDate } from "@/lib/order-date";
 import type { Order, OrderStatus } from "@/types";
+import { demoOrders } from "@/app/(public)/order-tracking/_demo-orders";
 import { OrderTrackingProgress } from "./order-tracking-progress";
 import { OrderTrackingSummary } from "./order-tracking-summary";
+
+const DEMO_ORDER_NUMBER = "96459761";
 
 const STATUS_MESSAGES: Record<OrderStatus, string> = {
   pending: "Your order has been placed and is being prepared.",
@@ -35,11 +39,13 @@ function statusToStepIndex(status: OrderStatus) {
 }
 
 export function OrderTrackingPanel() {
-  const [values, setValues] = React.useState<OrderTrackingInput>({ orderNumber: "" });
-  const [order, setOrder] = React.useState<Order | null>(null);
+  const [values, setValues] = React.useState<OrderTrackingInput>({
+    orderNumber: DEMO_ORDER_NUMBER,
+  });
+  const [order, setOrder] = React.useState<Order | null>(demoOrders[DEMO_ORDER_NUMBER] ?? null);
   const [formError, setFormError] = React.useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = React.useState(false);
-  const [hasSearched, setHasSearched] = React.useState(false);
+  const [hasSearched, setHasSearched] = React.useState(true);
 
   async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
@@ -57,9 +63,18 @@ export function OrderTrackingPanel() {
       const found = await orderService.getByNumber(result.data.orderNumber);
       setOrder(found);
     } catch (error) {
-      setFormError(
-        error instanceof ApiClientError ? error.message : "We couldn't find an order with that number."
-      );
+      // Order lookups aren't backed by a live API yet, so demo orders keep the
+      // tracking flow usable by number in the meantime.
+      const demo = demoOrders[result.data.orderNumber.trim()];
+      if (demo) {
+        setOrder(demo);
+      } else {
+        setFormError(
+          error instanceof ApiClientError
+            ? error.message
+            : "We couldn't find an order with that number."
+        );
+      }
     } finally {
       setIsSubmitting(false);
       setHasSearched(true);
@@ -137,11 +152,7 @@ export function OrderTrackingPanel() {
                 <p className="mb-4 text-sm text-[#636363]">
                   Order expected arrival{" "}
                   <span className="font-semibold text-[#111827]">
-                    {new Date(order.estimatedDelivery).toLocaleDateString("en-AU", {
-                      day: "2-digit",
-                      month: "short",
-                      year: "numeric",
-                    })}
+                    {formatOrderDate(order.estimatedDelivery)}
                   </span>
                 </p>
               )}

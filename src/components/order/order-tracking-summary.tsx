@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Image from "next/image";
+import { formatOrderDateTime } from "@/lib/order-date";
 import type { Order } from "@/types";
 
 export function OrderTrackingSummary({
@@ -13,13 +14,7 @@ export function OrderTrackingSummary({
 }) {
   const [expanded, setExpanded] = React.useState(false);
 
-  const dateLabel = new Date(order.createdAt).toLocaleString("en-AU", {
-    day: "2-digit",
-    month: "short",
-    year: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-  });
+  const dateLabel = formatOrderDateTime(order.createdAt);
 
   return (
     <div className="mt-5 rounded-xl bg-[#F5F5F5] p-4">

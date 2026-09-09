@@ -1,11 +1,10 @@
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
+
 import Banner from "@/components/home/Banner"
 import Event from "@/components/home/Event"
 
 export default function HomePage() {
   return (
-<div className="max-w-360">
+<div className="max-w-1240 mx-auto">
 
 <Banner></Banner>
 {/* <Event></Event> */}
