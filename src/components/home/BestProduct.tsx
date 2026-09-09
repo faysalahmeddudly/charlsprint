@@ -1,5 +1,6 @@
 import React from "react";
 import ProductCardSm, { ProductHome } from "../shared/ProductCardSm";
+import {ArrowDown } from 'lucide-react'
 
 export default function BestProduct() {
   const productData:ProductHome[] = [
@@ -149,6 +150,17 @@ export default function BestProduct() {
         {productData.map((product) => {
           return <ProductCardSm product={product} key={product.id} />;
         })}
+
+
+
+        <div className="flex border border-[#CBD5E1] items-center justify-center px-[10] py-6 gap-1 mt-10">
+          <div className="text-xs text-[#1E293B] font-bold">Browse More Garments</div>
+          <div>
+            <ArrowDown  color="#1E293B" size={16} />
+          </div>
+        </div>
+
+
       </div>
     </section>
   );
