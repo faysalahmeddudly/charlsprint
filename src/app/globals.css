@@ -4,6 +4,17 @@
 
 /* @custom-variant dark (&:is(.dark *)); */
 
+:root {
+  /* Color of the active swiper pagination dot */
+  --swiper-pagination-color: #ef242b;
+
+  /* Color of the inactive swiper pagination dots */
+  --swiper-pagination-bullet-inactive-color: #cbd5e1;
+
+  /* Opacity of the inactive swiper pagination dots */
+  --swiper-pagination-bullet-inactive-opacity: 1;
+}
+
 @utility scrollbar-none {
   -ms-overflow-style: none;
   scrollbar-width: none;

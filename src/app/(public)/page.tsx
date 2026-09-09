@@ -4,7 +4,7 @@ import Event from "@/components/home/Event"
 
 export default function HomePage() {
   return (
-<div className="max-w-1240 mx-auto">
+<div className="max-w-[1240px] mx-auto">
 
 <Banner></Banner>
 {/* <Event></Event> */}
