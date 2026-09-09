@@ -2,7 +2,7 @@ import React from "react";
 import ProductCardSm, { ProductHome } from "../shared/ProductCardSm";
 
 export default function BestProduct() {
-  const productData:ProductHome[] = [
+  const productData: ProductHome[] = [
     {
       id: 1,
       image: "/shirt.png",
