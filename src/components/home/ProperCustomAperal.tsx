@@ -109,7 +109,7 @@ export default function ProperCustomAperal() {
 
         {/* product card */}
 
-        <div className="flex font-dm-sans justify-between items-center">
+        <div className="flex font-dm-sans pt-8 gap-4  justify-between items-center">
           {popularSellerProductData.map((product) => (
             <div
               key={product.id}
