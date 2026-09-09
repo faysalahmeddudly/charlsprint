@@ -13,7 +13,7 @@ import {
   isLightColor,
   VISIBLE_COLOR_COUNT,
 } from "@/components/shop/product-customizer.constants"
-import type { Garment } from "@/app/(public)/shop/_data"
+import type { Garment } from "@/app/(public)/create-design/_data"
 
 const SURFACE_CARD = "rounded-2xl bg-card-secondary p-4"
 

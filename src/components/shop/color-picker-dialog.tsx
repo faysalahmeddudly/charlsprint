@@ -12,7 +12,7 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog"
-import type { Garment } from "@/app/(public)/shop/_data"
+import type { Garment } from "@/app/(public)/create-design/_data"
 import { isLightColor } from "./product-customizer.constants"
 
 export function ColorPickerDialog({

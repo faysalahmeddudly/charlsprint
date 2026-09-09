@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import type { Garment } from "@/app/(public)/shop/_data";
+import type { Garment } from "@/app/(public)/create-design/_data";
 
 function getBadge(tags: string[]): string | null {
   if (tags.includes("new")) return "NEW";

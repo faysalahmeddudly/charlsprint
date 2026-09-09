@@ -1,4 +1,4 @@
-import { garments } from "@/app/(public)/shop/_data";
+import { garments } from "@/app/(public)/create-design/_data";
 import { GarmentExploreCard } from "@/components/shop/garment-explore-card";
 
 export function RecentlyExploredSection() {

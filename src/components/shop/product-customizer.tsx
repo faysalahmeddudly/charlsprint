@@ -16,7 +16,7 @@ import {
 import { cn } from "cn";
 import { Button } from "@/components/ui/button";
 import { EmbroideryIcon } from "@/components/icons/embroidery-icon";
-import type { Garment } from "@/app/(public)/shop/_data";
+import type { Garment } from "@/app/(public)/create-design/_data";
 import {
   currency,
   VISIBLE_COLOR_COUNT,
