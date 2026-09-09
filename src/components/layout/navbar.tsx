@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import {
   ChevronDown,
   Heart,
@@ -9,8 +12,11 @@ import {
 } from "lucide-react";
 import LogoComp from "../shared/logoComp";
 import { Input } from "../ui/input";
+import { GarmentsDrawer } from "./garments-drawer";
 
 export function Navbar() {
+  const [isGarmentsOpen, setIsGarmentsOpen] = useState(false);
+
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/create-design", label: "Create Design" },
@@ -106,7 +112,11 @@ export function Navbar() {
         <div className="bg-[#111827]">
           <div className="max-w-[1216px] mx-auto gap-3 py-2 flex items-center justify-between">
             <div className="flex items-center gap-8">
-              <button className="flex items-center gap-2 rounded bg-[#DC2626] px-4 py-2 text-sm font-semibold tracking-wide text-white uppercase whitespace-nowrap">
+              <button
+                type="button"
+                onClick={() => setIsGarmentsOpen(true)}
+                className="flex items-center gap-2 rounded bg-[#DC2626] px-4 py-2 text-sm font-semibold tracking-wide text-white uppercase whitespace-nowrap"
+              >
                 <Menu className="size-4" />
                 All Garments
               </button>
@@ -133,6 +143,8 @@ export function Navbar() {
 
 
       </nav>
+
+      <GarmentsDrawer isOpen={isGarmentsOpen} onClose={() => setIsGarmentsOpen(false)} />
     </header>
   );
 }
