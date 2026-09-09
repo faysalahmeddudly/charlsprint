@@ -7,7 +7,7 @@ export default function HomePage() {
 <div className="max-w-[1240px] mx-auto">
 
 <Banner></Banner>
-{/* <Event></Event> */}
+<Event></Event>
 
 
   <div className="">
