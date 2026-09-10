@@ -302,6 +302,9 @@ export function ProductCustomizer({
       {/* sidebar  */}
 
       <div className="max-w-[426.67px] space-y-3">
+
+
+        
         <section className={`${SURFACE_CARD} space-y-2`}>
           <div className=" flex items-center justify-between">
             <p className="font-plus-jakarta-sans text-xs font-semibold tracking-wide text-muted-foreground">

@@ -79,12 +79,9 @@ export function ProductDetails({ garment }: { garment: Garment }) {
   return (
     <div className="space-y-10 mt-[50px] mb-[150px] max-w-[1240px] mx-auto">
       <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_380px]">
-        
         {/* image div */}
+
         <div className="flex flex-col gap-[25px]">
-
-
-
           <div className="relative aspect-[137/105] overflow-hidden rounded-[22px] border border-[#E5E5E5] ">
             {activeImage && (
               <Image
@@ -124,57 +121,69 @@ export function ProductDetails({ garment }: { garment: Garment }) {
           }
         </div>
 
-        <div className="space-y-4">
-          <div>
-            <h1 className="text-xl font-semibold tracking-tight">
-              {garment.name}
-            </h1>
-            <p className="text-xs text-muted-foreground">
-              {garment.fabric} • {garment.fit}
-            </p>
+        {/* details container & action button  */}
+        <div className="space-y-[30px]">
+
+
+
+          {/* name & price */}
+          <div className="flex flex-col gap-[10px]">
+           
+              <h1 className="font-rubik text-2xl leading-none font-semibold tracking-normal text-[#000116]">
+                {garment.name}
+              </h1>
+              
+            
+            <h2 className="font-rubik text-[32px] leading-none font-semibold tracking-normal text-[#EF252C]">
+                {currency(garment.price)}
+              </h2>
+
+            <div className="flex items-baseline gap-2">
+
+              {discountPercent !== undefined && garment.compareAtPrice && (
+                <>
+                  <span className="font-rubik text-base leading-none font-normal tracking-normal text-[#636363] line-through">
+                    {currency(garment.compareAtPrice)}
+                  </span>
+                  <span className="font-rubik text-base leading-none font-bold tracking-normal text-[#636363]">
+                    -{discountPercent}%
+                  </span>
+                </>
+              )}
+            </div>
           </div>
 
-          <div className="flex items-baseline gap-2">
-            <span className="text-3xl font-bold text-destructive">
-              {currency(garment.price)}
-            </span>
-            {discountPercent !== undefined && garment.compareAtPrice && (
-              <>
-                <span className="text-sm text-muted-foreground line-through">
-                  {currency(garment.compareAtPrice)}
-                </span>
-                <span className="text-sm font-medium text-muted-foreground">
-                  -{discountPercent}%
-                </span>
-              </>
-            )}
-          </div>
 
-          <section className={SURFACE_CARD}>
-            <p className="mb-3 text-xs font-semibold tracking-wide text-muted-foreground">
-              SECTION B // SIZE DISTRIBUTION
-            </p>
-            <div className="mb-3 grid grid-cols-3 gap-2">
+
+          <section className={`${SURFACE_CARD} space-y-2`}>
+            <div className="mb-3 flex items-center  justify-between">
+              <p className="font-plus-jakarta-sans text-xs font-semibold tracking-wide text-muted-foreground">
+                SECTION B // SIZE DISTRIBUTION
+              </p>
+            </div>
+
+            <div className="grid  grid-cols-3 gap-2">
               {garment.pricingTiers.map((t) => (
                 <button
                   key={t.id}
                   type="button"
                   onClick={() => setTierId(t.id)}
                   className={cn(
-                    "rounded-md px-2 py-2 text-xs font-medium transition-colors",
+                    "h-[47px] rounded-[2px] px-2 py-1 text-[11px] leading-[14px] font-semibold tracking-[0.44px] transition-colors flex items-center justify-center",
                     t.id === tier.id
-                      ? "bg-destructive text-white"
-                      : "bg-background text-muted-foreground hover:bg-background/70",
+                      ? "bg-destructive text-white shadow-[0_1px_2px_0_#0000000D]"
+                      : "bg-[#E5EEFF] text-[#0B1C30] hover:bg-[#E5EEFF]/70",
                   )}
                 >
                   {t.label}
                 </button>
               ))}
             </div>
+
             <div className="grid grid-cols-7 gap-1.5">
               {garment.sizes.map((size) => (
                 <div key={size.id} className="space-y-1 text-center">
-                  <p className="text-[11px] text-muted-foreground">
+                  <p className="text-[11px] leading-[14px] font-semibold tracking-[0.44px] text-muted-foreground">
                     {size.label}
                   </p>
                   <input
@@ -182,40 +191,46 @@ export function ProductDetails({ garment }: { garment: Garment }) {
                     min={0}
                     value={quantities[size.id]}
                     onChange={(e) => setQty(size.id, Number(e.target.value))}
-                    className="h-8 w-full rounded-md border border-input bg-transparent text-center text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50"
+                    className=" w-full py-[7.5px] rounded-[2px]  bg-white text-center text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50"
                   />
                 </div>
               ))}
             </div>
-            <div className="mt-3 flex items-center justify-between border-t border-border pt-3">
+
+            <div className=" flex items-center justify-between  pt-3">
               <span className="text-xs text-muted-foreground">
                 Aggregate Batch Run:
               </span>
-              <span className="text-lg font-semibold text-destructive">
+
+              <span className="text-2xl font-extrabold text-[#DC2626]">
                 {totalUnits}{" "}
-                <span className="text-xs font-medium text-foreground">
+                <span className="text-[11px] leading-[14px] font-semibold tracking-[0.44px] text-muted-foreground uppercase">
                   units total
                 </span>
               </span>
             </div>
           </section>
 
-          <section className={SURFACE_CARD}>
-            <div className="mb-3 flex items-center justify-between">
-              <p className="text-xs font-semibold tracking-wide text-muted-foreground">
+          <section className={`${SURFACE_CARD} space-y-2`}>
+            <div className="flex items-center justify-between">
+              <p className="font-plus-jakarta-sans text-xs font-semibold tracking-wide text-muted-foreground">
                 SECTION C // GARMENT HUE
               </p>
+
               {garment.colors.length > VISIBLE_COLOR_COUNT && (
-                <button
+                <Button
                   type="button"
+                  variant="outline"
+                  size="sm"
                   onClick={() => setColorModalOpen(true)}
-                  className="text-xs font-medium text-destructive"
+                  className=" border-none bg-transparent  text-base  font-semibold tracking-[-0.16px] text-[#DC2626] hover:bg-transparent/70 font-plus-jakarta-sans"
                 >
                   See More
-                </button>
+                </Button>
               )}
             </div>
-            <div className="flex flex-wrap gap-2">
+
+            <div className="flex justify-between flex-nowrap gap-2 overflow-hidden">
               {garment.colors.slice(0, VISIBLE_COLOR_COUNT).map((color) => (
                 <button
                   key={color.id}
@@ -223,10 +238,8 @@ export function ProductDetails({ garment }: { garment: Garment }) {
                   title={color.name}
                   onClick={() => setColorId(color.id)}
                   className={cn(
-                    "flex size-9 shrink-0 items-center justify-center rounded-md border transition-shadow",
-                    color.id === colorId
-                      ? "border-foreground ring-2 ring-offset-1 ring-foreground/40"
-                      : "border-border",
+                    "flex size-[42px] shrink-0 items-center justify-center rounded-xl border shadow-[0_1px_2px_0_#0000000D] transition-shadow",
+                    color.id === colorId ? "border-foreground" : "border-border",
                   )}
                   style={{ backgroundColor: color.swatch }}
                 >
@@ -267,12 +280,7 @@ export function ProductDetails({ garment }: { garment: Garment }) {
         </div>
       </div>
 
-
-
-
-
-{/* details container & action button  */}
-
+      {/* all sizes  */}
 
       {garment.sizeChart && garment.sizeChart.length > 0 && (
         <div className="overflow-x-auto">
@@ -312,9 +320,6 @@ export function ProductDetails({ garment }: { garment: Garment }) {
         colorId={colorId}
         onAccept={setColorId}
       />
-
-
-      
     </div>
   );
 }
