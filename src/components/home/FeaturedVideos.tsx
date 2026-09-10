@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from "react";
-import { VolumeX, Play, ArrowRight } from "lucide-react";
+import { VolumeX, ArrowRight } from "lucide-react";
 
 const ACTIVE_BORDER_COLOR = "#DC2626";
 const ACTIVE_BORDER_WIDTH = 2; // recommended: 2px keeps the highlight visible without overpowering the 24px card radius
@@ -13,30 +13,35 @@ const FeaturedVideos = () => {
       image: "/video1.jpg",
       title: "Direct-to-Garment Printing",
       category: "DTG PRINTING",
+      badge: "WHICH BLANK?",
     },
     {
       id: 2,
       image: "/video2.jpg",
       title: "500 Tees in 8 Hours",
       category: "SCREEN PRINT",
+      badge: "WHICH BLANK?",
     },
     {
       id: 3,
       image: "/video3.jpg",
       title: "DTG vs DTF: Which Is Right for You?",
       category: "COMPARISON",
+      badge: "WHICH BLANK?",
     },
     {
       id: 4,
       image: "/video4.jpg",
       title: "Digitizing Custom Embroidery",
       category: "EMBROIDERY",
+      badge: "WHICH BLANK?",
     },
     {
       id: 5,
       image: "/video5.jpg",
       title: "Online Studio: Create Your Design",
       category: "ONLINE TOOL",
+      badge: "WHICH BLANK?",
     },
   ];
 
@@ -89,6 +94,15 @@ const FeaturedVideos = () => {
                     }}
                   />
 
+                  {/* Badge */}
+                  {isActive && (
+                    <div className="absolute top-3 left-1/2 -translate-x-1/2 rounded-[4px] border border-white/20 bg-black/80 py-0.5 px-3">
+                      <span className="font-dm-sans font-bold text-[10px] leading-[15px] tracking-[1px] uppercase text-white">
+                        {video.badge}
+                      </span>
+                    </div>
+                  )}
+
                   {/* Mute button */}
                   <button
                     type="button"
@@ -99,20 +113,107 @@ const FeaturedVideos = () => {
                   </button>
 
                   {/* Central play overlay */}
-                  <button
-                    type="button"
-                    aria-label="Play video"
-                    onClick={() => setActiveId(video.id)}
-                    className="absolute inset-0 flex items-center justify-center"
-                  >
-                    <span className="h-10 w-10 rounded-full bg-white/90 flex items-center justify-center">
-                      <Play
-                        size={16}
-                        className="text-black translate-x-[1px]"
-                        fill="currentColor"
-                      />
-                    </span>
-                  </button>
+                  {isActive && (
+                    <button
+                      type="button"
+                      aria-label="Play video"
+                      onClick={() => setActiveId(video.id)}
+                      className="absolute inset-0 flex items-center justify-center"
+                    >
+                      <svg
+                        width="68"
+                        height="68"
+                        viewBox="0 0 68 68"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <rect x="12" y="2" width="44" height="44" rx="22" fill="#DC2626" />
+                        <g filter="url(#filter0_dd_61_23031)">
+                          <rect
+                            x="12"
+                            y="2"
+                            width="44"
+                            height="44"
+                            rx="22"
+                            fill="white"
+                            fillOpacity="0.01"
+                            shapeRendering="crispEdges"
+                          />
+                        </g>
+                        <path
+                          d="M31.3 16.841C30.8378 16.5496 30.2538 16.5326 29.7754 16.7965C29.297 17.0605 28.9999 17.5636 29 18.11V29.89C28.9999 30.4364 29.297 30.9396 29.7754 31.2035C30.2538 31.4675 30.8378 31.4504 31.3 31.159L40.644 25.269C41.0798 24.9943 41.3442 24.5152 41.3442 24C41.3442 23.4848 41.0798 23.0057 40.644 22.731L31.3 16.84V16.841Z"
+                          fill="white"
+                        />
+                        <defs>
+                          <filter
+                            id="filter0_dd_61_23031"
+                            x="0"
+                            y="0"
+                            width="68"
+                            height="68"
+                            filterUnits="userSpaceOnUse"
+                            colorInterpolationFilters="sRGB"
+                          >
+                            <feFlood floodOpacity="0" result="BackgroundImageFix" />
+                            <feColorMatrix
+                              in="SourceAlpha"
+                              type="matrix"
+                              values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                              result="hardAlpha"
+                            />
+                            <feMorphology
+                              radius="4"
+                              operator="erode"
+                              in="SourceAlpha"
+                              result="effect1_dropShadow_61_23031"
+                            />
+                            <feOffset dy="4" />
+                            <feGaussianBlur stdDeviation="3" />
+                            <feComposite in2="hardAlpha" operator="out" />
+                            <feColorMatrix
+                              type="matrix"
+                              values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"
+                            />
+                            <feBlend
+                              mode="normal"
+                              in2="BackgroundImageFix"
+                              result="effect1_dropShadow_61_23031"
+                            />
+                            <feColorMatrix
+                              in="SourceAlpha"
+                              type="matrix"
+                              values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                              result="hardAlpha"
+                            />
+                            <feMorphology
+                              radius="3"
+                              operator="erode"
+                              in="SourceAlpha"
+                              result="effect2_dropShadow_61_23031"
+                            />
+                            <feOffset dy="10" />
+                            <feGaussianBlur stdDeviation="7.5" />
+                            <feComposite in2="hardAlpha" operator="out" />
+                            <feColorMatrix
+                              type="matrix"
+                              values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"
+                            />
+                            <feBlend
+                              mode="normal"
+                              in2="effect1_dropShadow_61_23031"
+                              result="effect2_dropShadow_61_23031"
+                            />
+                            <feBlend
+                              mode="normal"
+                              in="SourceGraphic"
+                              in2="effect2_dropShadow_61_23031"
+                              result="shape"
+                            />
+                          </filter>
+                        </defs>
+                      </svg>
+                    </button>
+                  )}
 
                   {/* Bottom preview banner */}
                   <div className="absolute inset-x-3 bottom-3 rounded flex items-center justify-between gap-2 px-2 py-2 bg-white/95 backdrop-blur-sm">

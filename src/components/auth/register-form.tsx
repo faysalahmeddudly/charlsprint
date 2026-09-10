@@ -79,14 +79,14 @@ export function RegisterForm() {
   }
 
   return (
-    <div className="flex w-full flex-col items-center">
+    <div className="flex font-rubik w-full px-4 sm:px-0 flex-col items-center">
       {/* Brand logo — floats over the card's top border, per the Figma layout */}
       <Link
         href="/"
         className="relative z-10 mb-[-31px] flex h-[62px] w-[200px] items-center justify-center rounded-lg bg-white"
       >
         <Image
-          src="/logo-black.png"
+          src="/logo.png"
           alt="Charles Prints"
           width={149}
           height={62}
@@ -95,16 +95,18 @@ export function RegisterForm() {
         />
       </Link>
 
-      {/* Card — Frame 75: border #000116, radius 10, padding 60/30/30/30 */}
-      <div className="w-full max-w-[590px] rounded-[10px] border border-[#000116] bg-white px-[30px] pb-[30px] pt-[60px]">
-        <form onSubmit={handleSubmit} className="flex flex-col gap-10">
-          <h2 className="text-[32px] font-semibold leading-none text-[#636363]">
+      {/* border #000116, radius 10, padding 60/30/30/30 */}
+      <div className="w-full max-w-[590px] rounded-[10px] border border-[#000116] bg-white px-5 pb-6 pt-10 sm:px-[30px] sm:pb-[30px] sm:pt-[60px]">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-6 sm:gap-10">
+          <h2 className="text-2xl sm:text-[32px] font-semibold leading-none text-[#636363]">
             Create an account
           </h2>
 
-          {/* Frame 74 — field group, gap 24 */}
-          <div className="flex flex-col gap-6">
-            {/* Frame 72 — name */}
+          {/*  — field group, gap 24 */}
+
+          {formError && <p className="text-sm text-[#EF252C]">{formError}</p>}
+
+          <div className="flex flex-col gap-3 lg:gap-[22px]">
             <div className="flex flex-col gap-2">
               <label
                 htmlFor="name"
@@ -169,7 +171,7 @@ export function RegisterForm() {
             </div>
 
             {/* Frame 87 — password + confirm, gap 24 */}
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-3 lg:gap-6">
               <div className="flex flex-col gap-2">
                 <label
                   htmlFor="password"
@@ -228,10 +230,8 @@ export function RegisterForm() {
             </div>
           </div>
 
-          {formError && <p className="text-sm text-[#EF252C]">{formError}</p>}
-
-          {/* Frame 79 — button, terms, social login, gap 24 */}
-          <div className="flex flex-col gap-6">
+          {/*  — button, terms, social login, gap 24 */}
+          <div className="flex flex-col gap-3 lg:gap-6">
             <Button
               type="submit"
               disabled={isSubmitting}
@@ -256,40 +256,51 @@ export function RegisterForm() {
               <p className="text-sm font-medium text-[#636363]">
                 or login with
               </p>
-              <div className="flex items-center gap-6">
-                <button
-                  type="button"
-                  aria-label="Continue with Google"
-                  className="flex h-9 w-9 items-center justify-center rounded-full transition-opacity hover:opacity-80"
-                >
-                  <Image src="/google-logo.png" alt="" width={36} height={36} />
-                </button>
-                <button
-                  type="button"
-                  aria-label="Continue with Facebook"
-                  className="flex h-9 w-9 items-center justify-center rounded-full transition-opacity hover:opacity-80"
-                >
-                  <Image
-                    src="/facebook-logo.png"
-                    alt=""
-                    width={36}
-                    height={36}
-                  />
-                </button>
+
+              <div>
+                {" "}
+                <div className="flex items-center justify-center gap-6">
+                  <button
+                    type="button"
+                    aria-label="Continue with Google"
+                    className="flex h-9 w-9 items-center justify-center rounded-full transition-opacity hover:opacity-80"
+                  >
+                    <Image src="/google.png" alt="" width={36} height={36} />
+                  </button>
+                  <button
+                    type="button"
+                    aria-label="Continue with Facebook"
+                    className="flex h-9 w-9 items-center justify-center rounded-full transition-opacity hover:opacity-80"
+                  >
+                    <Image src="/fb.png" alt="" width={36} height={36} />
+                  </button>
+                </div>
+                <p className="mt-6 flex items-center gap-1 text-base text-[#636363]">
+                  Already have an account?{" "}
+                  <Link
+                    href="/login"
+                    className="flex items-center gap-1 text-[#EF252C]"
+                  >
+                    Sign in
+                    <ChevronDown className="h-4 w-4 text-[#000116]" />
+                  </Link>
+                </p>
               </div>
             </div>
           </div>
         </form>
+        {/*  "Already have an account? Sign in ⌄" */}
       </div>
 
-      {/* Frame 83 — "Already have an account? Sign in ⌄" */}
-      <p className="mt-6 flex items-center gap-1 text-base text-[#636363]">
-        Already have an account?{" "}
-        <Link href="/login" className="flex items-center gap-1 text-[#EF252C]">
-          Sign in
-          <ChevronDown className="h-4 w-4 text-[#000116]" />
-        </Link>
-      </p>
+      <div className=" flex flex-col items-center pt-10 gap-[18px] ">
+        <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-9 text-[#636363] text-xs">
+          <h1>Conditions of Use</h1>
+          <h1> Privacy Notice</h1>
+          <h1> Help </h1>
+        </div>
+
+        <h1 className="text-[#000116] text-xs">© 2026, charlesprints.com</h1>
+      </div>
     </div>
   );
 }

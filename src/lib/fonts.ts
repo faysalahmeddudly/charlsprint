@@ -1,4 +1,4 @@
-import { Anton, Bebas_Neue, Cinzel, DM_Sans, Inter, Plus_Jakarta_Sans } from "next/font/google"
+import { Anton, Bebas_Neue, Cinzel, DM_Sans, Inter, Plus_Jakarta_Sans, Rubik } from "next/font/google"
 
 export const dmSans = DM_Sans({
   variable: "--font-dm-sans",
@@ -29,5 +29,10 @@ export const anton = Anton({
 
 export const cinzel = Cinzel({
   variable: "--font-cinzel",
+  subsets: ["latin"],
+})
+
+export const rubik = Rubik({
+  variable: "--font-rubik",
   subsets: ["latin"],
 })

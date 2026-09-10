@@ -13,6 +13,7 @@ export const registerSchema = z
     email: z.string().min(1, "Email is required").email("Enter a valid email"),
     password: z.string().min(8, "Password must be at least 8 characters"),
     confirmPassword: z.string().min(8, "Confirm your password"),
+    phone:z.string().min(12).optional
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords do not match",
