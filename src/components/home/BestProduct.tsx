@@ -3,7 +3,7 @@ import ProductCardSm, { ProductHome } from "../shared/ProductCardSm";
 import {ArrowDown } from 'lucide-react'
 
 export default function BestProduct() {
-  const productData:ProductHome[] = [
+  const productData: ProductHome[] = [
     {
       id: 1,
       image: "/shirt.png",
