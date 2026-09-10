@@ -7,12 +7,9 @@ export const metadata: Metadata = {
 
 export default function LoginPage() {
   return (
-    <div className="flex w-full max-w-sm flex-col items-center gap-6">
-      <div className="text-center">
-        <h1 className="text-xl font-semibold">Welcome back</h1>
-        <p className="text-sm text-muted-foreground">Sign in to continue to CharlsPrint</p>
-      </div>
-      <LoginForm />
-    </div>
+     <div className="font-rubik flex justify-center items-center overflow-y-auto min-h-screen py-10 sm:overflow-hidden sm:h-screen sm:py-0">
+    
+          <LoginForm/>
+        </div>
   )
 }
