@@ -12,10 +12,11 @@ import {
   currency,
   isLightColor,
   VISIBLE_COLOR_COUNT,
+  SURFACE_CARD as CUSTOMIZER_SURFACE_CARD,
 } from "@/components/shop/product-customizer.constants";
 import type { Garment } from "@/app/(public)/create-design/_data";
 
-const SURFACE_CARD = "rounded-2xl bg-card-secondary p-4";
+const SURFACE_CARD = "rounded-lg bg-card-secondary p-3";
 
 export function ProductDetails({ garment }: { garment: Garment }) {
   const { addItem } = useCart();
@@ -211,7 +212,7 @@ export function ProductDetails({ garment }: { garment: Garment }) {
             </div>
           </section>
 
-          <section className={`${SURFACE_CARD} space-y-2`}>
+          <section className={`${CUSTOMIZER_SURFACE_CARD} space-y-2`}>
             <div className="flex items-center justify-between">
               <p className="font-plus-jakarta-sans text-xs font-semibold tracking-wide text-muted-foreground">
                 SECTION C // GARMENT HUE
@@ -230,8 +231,8 @@ export function ProductDetails({ garment }: { garment: Garment }) {
               )}
             </div>
 
-            <div className="flex justify-between flex-nowrap gap-2 overflow-hidden">
-              {garment.colors.slice(0, VISIBLE_COLOR_COUNT).map((color) => (
+            <div className="grid grid-cols-8 gap-2">
+              {garment.colors.map((color) => (
                 <button
                   key={color.id}
                   type="button"
@@ -256,11 +257,11 @@ export function ProductDetails({ garment }: { garment: Garment }) {
             </div>
           </section>
 
-          <div className="flex gap-3">
+          <div className="flex gap-4">
             <Button
               variant="outline"
               size="lg"
-              className="flex-1"
+              className="flex-1 gap-3 rounded-[4px] border-[#EF252C] px-8 py-4 text-[#EF252C] hover:bg-[#EF252C]/5"
               disabled={totalUnits === 0}
               onClick={handleAddToCart}
             >
@@ -269,7 +270,7 @@ export function ProductDetails({ garment }: { garment: Garment }) {
             </Button>
             <Button
               size="lg"
-              className="flex-1 bg-destructive text-white hover:bg-destructive/90"
+              className="flex-1 gap-3 rounded-[4px] bg-destructive px-8 py-4 text-white hover:bg-destructive/90"
               nativeButton={false}
               render={<Link href={designHref} />}
             >
