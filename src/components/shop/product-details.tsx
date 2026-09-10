@@ -68,7 +68,7 @@ export function ProductDetails({ garment }: { garment: Garment }) {
     setTimeout(() => setJustAdded(false), 1800);
   }
 
-  const designHref = `/shop/${garment?.id}/design${
+  const designHref = `/create-design/${garment?.id}/design${
     colorId || tierId
       ? `?${new URLSearchParams({
           ...(colorId ? { color: colorId } : {}),

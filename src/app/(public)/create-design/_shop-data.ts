@@ -1,4 +1,4 @@
-import { garments } from "../create-design/_data"
+import { garments } from "./_data"
 
 export const shopProducts = garments
 

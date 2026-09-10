@@ -6,7 +6,7 @@ export function ProductCard({ product }: { product: Product }) {
   const image = product.images[0]
 
   return (
-    <Link href={`/shop/${product.slug}`} className="group block space-y-2">
+    <Link href={`/create-design/${product.slug}`} className="group block space-y-2">
       <div className="aspect-square overflow-hidden rounded-lg bg-muted">
         {image && (
           <Image

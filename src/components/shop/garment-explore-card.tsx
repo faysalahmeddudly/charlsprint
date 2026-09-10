@@ -21,7 +21,7 @@ export function GarmentExploreCard({ garment }: { garment: Garment }) {
   return (
     <div className="flex flex-col">
       <Link
-        href={`/shop/${garment.slug}`}
+        href={`/create-design/${garment.slug}`}
         className="group relative block aspect-square overflow-hidden rounded-md bg-[#F5F5F5]"
       >
         {badge && (
@@ -44,7 +44,7 @@ export function GarmentExploreCard({ garment }: { garment: Garment }) {
         {garment.category}
       </p>
       <Link
-        href={`/shop/${garment.slug}`}
+        href={`/create-design/${garment.slug}`}
         className="text-sm font-medium text-[#111827] hover:text-[#DC2626]"
       >
         {garment.name}
@@ -78,7 +78,7 @@ export function GarmentExploreCard({ garment }: { garment: Garment }) {
         </div>
 
         <Link
-          href={`/shop/${garment.slug}/design`}
+          href={`/create-design/${garment.slug}/design`}
           className="flex items-center gap-1 text-xs font-semibold text-[#DC2626] hover:underline"
         >
           Design Now <ArrowRight className="size-3" />

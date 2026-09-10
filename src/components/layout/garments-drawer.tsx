@@ -13,28 +13,28 @@ type CategoryItem = {
 const categories: CategoryItem[] = [
   {
     label: "Men",
-    href: "/shop?category=men",
+    href: "/create-design?category=men",
     subItems: [
-      { label: "Crew Neck", href: "/shop?category=men&fit=crew-neck" },
-      { label: "V-Neck", href: "/shop?category=men&fit=v-neck" },
-      { label: "Crew Neck", href: "/shop?category=men&fit=crew-neck-2" },
-      { label: "Boxy/Oversized", href: "/shop?category=men&fit=boxy-oversized" },
-      { label: "Crew Neck", href: "/shop?category=men&fit=crew-neck-3" },
-      { label: "Slim Fit", href: "/shop?category=men&fit=slim-fit" },
-      { label: "Regular Fit", href: "/shop?category=men&fit=regular-fit" },
-      { label: "Relax Fit", href: "/shop?category=men&fit=relax-fit" },
-      { label: "Shorter", href: "/shop?category=men&fit=shorter" },
-      { label: "Taller", href: "/shop?category=men&fit=taller" },
+      { label: "Crew Neck", href: "/create-design?category=men&fit=crew-neck" },
+      { label: "V-Neck", href: "/create-design?category=men&fit=v-neck" },
+      { label: "Crew Neck", href: "/create-design?category=men&fit=crew-neck-2" },
+      { label: "Boxy/Oversized", href: "/create-design?category=men&fit=boxy-oversized" },
+      { label: "Crew Neck", href: "/create-design?category=men&fit=crew-neck-3" },
+      { label: "Slim Fit", href: "/create-design?category=men&fit=slim-fit" },
+      { label: "Regular Fit", href: "/create-design?category=men&fit=regular-fit" },
+      { label: "Relax Fit", href: "/create-design?category=men&fit=relax-fit" },
+      { label: "Shorter", href: "/create-design?category=men&fit=shorter" },
+      { label: "Taller", href: "/create-design?category=men&fit=taller" },
     ],
   },
-  { label: "Women", href: "/shop?category=women" },
-  { label: "Kids", href: "/shop?category=kids" },
+  { label: "Women", href: "/create-design?category=women" },
+  { label: "Kids", href: "/create-design?category=kids" },
 ];
 
 const choices = [
-  { label: "New arrival", href: "/shop?sort=new-arrival" },
-  { label: "Best seller", href: "/shop?sort=best-seller" },
-  { label: "Recently explored", href: "/shop?sort=recently-explored" },
+  { label: "New arrival", href: "/create-design?sort=new-arrival" },
+  { label: "Best seller", href: "/create-design?sort=best-seller" },
+  { label: "Recently explored", href: "/create-design?sort=recently-explored" },
 ];
 
 const helpLinks = [
@@ -173,7 +173,7 @@ export function GarmentsDrawer({
                 <CategoryRow key={category.label} item={category} />
               ))}
             </div>
-            <SeeAllLink href="/shop" />
+            <SeeAllLink href="/create-design" />
           </div>
 
           <hr className="border-[#E5E7EB]" />
@@ -181,7 +181,7 @@ export function GarmentsDrawer({
           <div>
             <h3 className="mb-3 text-sm font-bold text-[#111827]">Shop by Choices</h3>
             <SectionLinks items={choices} />
-            <SeeAllLink href="/shop" />
+            <SeeAllLink href="/create-design" />
           </div>
 
           <hr className="border-[#E5E7EB]" />

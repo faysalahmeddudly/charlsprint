@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import {
   ChevronDown,
   Heart,
@@ -47,9 +48,12 @@ export function Navbar() {
                   Sign Up & Get 10% Off Your First Bulk Order!
                 </div>
                 <div className="pl-4">
-                  <button className="rounded-full  px-3 py-1 bg-white  text-xs font-medium whitespace-nowrap">
+                  <Link
+                    href="/login"
+                    className="rounded-full  px-3 py-1 bg-white  text-xs font-medium whitespace-nowrap"
+                  >
                     Sign up today →
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>

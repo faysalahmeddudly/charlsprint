@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import ProductCardSm, { ProductHome } from "../shared/ProductCardSm";
 import {ArrowDown } from 'lucide-react'
 
@@ -148,19 +149,22 @@ export default function BestProduct() {
 
       <div className="grid grid-cols-4 gap-6 mt-10">
         {productData.map((product) => {
-          return <ProductCardSm product={product} key={product.id} />;
+          return (
+            <Link href="/create-design/as-colour-5001-staple" key={product.id}>
+              <ProductCardSm product={product} />
+            </Link>
+          );
         })}
+      </div>
 
-
-
-        <div className="flex border border-[#CBD5E1] items-center justify-center px-[10] py-6 gap-1 mt-10">
-          <div className="text-xs text-[#1E293B] font-bold">Browse More Garments</div>
-          <div>
-            <ArrowDown  color="#1E293B" size={16} />
-          </div>
-        </div>
-
-
+      <div className="flex justify-center mt-10">
+        <Link
+          href="/create-design"
+          className="flex items-center justify-center gap-1 rounded-full border border-[#CBD5E1] px-6 py-2.5 font-dm-sans text-xs font-bold text-[#1E293B]"
+        >
+          Browse More Garments
+          <ArrowDown color="#1E293B" size={16} />
+        </Link>
       </div>
     </section>
   );

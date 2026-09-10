@@ -58,7 +58,7 @@ export default function ShopCategory() {
       {/* shop category header  */}
       <div className="flex items-center justify-between">
         <h1 className="font-dm-sans text-2xl font-bold tracking-[-0.6px] text-[#111827]">
-          Shop by <br />
+          Shop by 
           Category
         </h1>
 

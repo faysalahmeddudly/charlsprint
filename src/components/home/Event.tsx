@@ -2,6 +2,7 @@ import React from "react";
 
 const Event = () => {
   return (
+    
     <div className="max-w-[1240px] mx-auto">
       {" "}
       <div className="max-w-[1240px] relative mx-auto overflow-hidden rounded-2xl">

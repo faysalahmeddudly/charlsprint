@@ -11,11 +11,7 @@ import { registerSchema, type RegisterInput } from "@/lib/validations/auth";
 import { authService } from "@/services/auth.service";
 import { ApiClientError } from "@/services/api-client";
 
-// NOTE: the Figma design includes a "Phone number" field that isn't part of
-// the original RegisterInput/registerSchema. It's tracked locally here and
-// sent alongside the validated fields on submit. If you want it validated
-// too, add `phone` to registerSchema in "@/lib/validations/auth".
-type RegisterFormValues = RegisterInput & { phone: string };
+type RegisterFormValues = RegisterInput;
 
 const initialValues: RegisterFormValues = {
   name: "",
@@ -43,8 +39,7 @@ export function RegisterForm() {
     event.preventDefault();
     setFormError(null);
 
-    const { phone, ...rest } = values;
-    const result = registerSchema.safeParse(rest);
+    const result = registerSchema.safeParse(values);
     if (!result.success) {
       const fieldErrors: Partial<Record<keyof RegisterInput, string>> = {};
       for (const issue of result.error.issues) {
@@ -58,7 +53,8 @@ export function RegisterForm() {
     setErrors({});
     setIsSubmitting(true);
     try {
-      await authService.register({ ...result.data, phone });
+      const { confirmPassword, ...payload } = result.data;
+      await authService.register(payload);
       router.push("/");
     } catch (error) {
       setFormError(
