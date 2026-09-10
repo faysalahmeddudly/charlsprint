@@ -64,7 +64,7 @@ export function ShopSidebar() {
   return (
     <div className="flex flex-col gap-2.5">
       <div>
-        <h3 className="mb-4 text-base font-bold text-[#000116]">
+        <h3 className="mb-4 font-rubik text-base leading-none font-bold text-black">
           Shop by Categories
         </h3>
 
@@ -73,10 +73,10 @@ export function ShopSidebar() {
             <div key={category.label}>
               <div className="flex items-center justify-between">
                 <span
-                  className={`text-sm ${
+                  className={`font-rubik text-sm leading-none ${
                     category.subItems
-                      ? "text-[#636363]"
-                      : "font-semibold text-[#111827]"
+                      ? "font-normal text-[#636363]"
+                      : "font-medium text-[#636363]"
                   }`}
                 >
                   {category.label}
@@ -89,7 +89,7 @@ export function ShopSidebar() {
                   {category.subItems.map((label, index) => (
                     <span
                       key={`${label}-${index}`}
-                      className="text-sm text-[#636363]"
+                      className="font-rubik text-sm leading-none font-normal text-[#636363]"
                     >
                       {label}
                     </span>
@@ -102,14 +102,14 @@ export function ShopSidebar() {
 
         <button
           type="button"
-          className="mt-3 flex items-center gap-1 text-sm font-medium text-[#FF3008]"
+          className="mt-3 flex items-center gap-1 font-rubik text-xs leading-none font-light text-[#FF3008]"
         >
           See all <ChevronDown className="size-4" />
         </button>
       </div>
 
       <div>
-        <h3 className="mb-4 text-base font-bold text-[#000116]">
+        <h3 className="mb-4 font-rubik text-base leading-none font-bold text-black">
           Price Range
         </h3>
 
@@ -117,24 +117,24 @@ export function ShopSidebar() {
           <input
             type="text"
             placeholder="Min price"
-            className="h-10 w-full rounded-[4px] border border-[#636363]/20 bg-white px-3 text-sm text-[#111827] outline-none placeholder:text-[#9CA3AF] focus-visible:ring-1 focus-visible:ring-[#EF252C] focus-visible:ring-offset-0"
+            className="h-auto w-full rounded-[4px] border border-[#636363]/20 bg-white px-3 py-2.5 font-rubik text-sm leading-none text-[#111827] outline-none placeholder:font-normal placeholder:text-[#636363] focus-visible:ring-1 focus-visible:ring-[#EF252C] focus-visible:ring-offset-0"
           />
           <input
             type="text"
             placeholder="Max price"
-            className="h-10 w-full rounded-[4px] border border-[#636363]/20 bg-white px-3 text-sm text-[#111827] outline-none placeholder:text-[#9CA3AF] focus-visible:ring-1 focus-visible:ring-[#EF252C] focus-visible:ring-offset-0"
+            className="h-auto w-full rounded-[4px] border border-[#636363]/20 bg-white px-3 py-2.5 font-rubik text-sm leading-none text-[#111827] outline-none placeholder:font-normal placeholder:text-[#636363] focus-visible:ring-1 focus-visible:ring-[#EF252C] focus-visible:ring-offset-0"
           />
         </div>
       </div>
 
       <div>
-        <h3 className="mb-4 text-base font-bold text-[#000116]">Size</h3>
+        <h3 className="mb-4 font-rubik text-base leading-none font-bold text-black">Size</h3>
 
-        <div className="grid grid-cols-5 gap-2">
+        <div className="flex flex-wrap gap-2">
           {sizes.map((size) => (
             <div
               key={size}
-              className="flex h-10 items-center justify-center rounded-[4px] border border-[#636363]/20 bg-white text-sm text-[#374151]"
+              className="flex h-auto w-11 items-center justify-center rounded-[4px] border border-[#636363]/20 bg-white px-1 py-2.5 font-rubik text-sm leading-none font-normal whitespace-nowrap text-[#636363]"
             >
               {size}
             </div>
@@ -143,7 +143,7 @@ export function ShopSidebar() {
       </div>
 
       <div>
-        <h3 className="mb-4 text-base font-bold text-[#000116]">Color</h3>
+        <h3 className="mb-4 font-rubik text-base leading-none font-bold text-black">Color</h3>
 
         <div className="grid grid-cols-5 gap-2">
           {swatchColors.map((color, index) => (
