@@ -17,8 +17,9 @@ export function PriceFilter({
   return (
     <select
       value={value}
+      // border-[#E5E7EB] focus-visible:ring-[#EF252C]
       onChange={(event) => onChange(event.target.value as ProductFilters["sort"] | "")}
-      className="rounded-md border border-[#E5E7EB] bg-white px-3 py-1.5 text-sm font-medium text-[#374151] outline-none focus-visible:ring-1 focus-visible:ring-[#EF252C] focus-visible:ring-offset-0"
+      className=" border  bg-white px-3 py-1.5 text-sm font-medium text-[#374151] outline-none focus-visible:ring-1  focus-visible:ring-offset-0"
     >
       <option value="">Sort by</option>
       {SORT_OPTIONS.map((option) => (
