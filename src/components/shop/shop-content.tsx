@@ -2,14 +2,42 @@
 
 import { useMemo, useState, type Dispatch, type SetStateAction } from "react"
 import { useSearchParams } from "next/navigation"
+import Link from "next/link"
 import type { Garment } from "@/app/(public)/create-design/_data"
 import type { ProductFilters } from "@/types"
-import { ProductGrid } from "@/components/shop/product-grid"
+import ProductCardSm, { type ProductHome } from "@/components/shared/ProductCardSm"
 import { FilterComponent } from "@/components/shop/filter-component"
 import { PriceFilter } from "@/components/shop/price-filter"
 import { SidebarBanners } from "@/components/shop/sidebar-banners"
 import { ShopSponsoredBanner } from "@/components/shop/shop-sponsored-banner"
 import type { ShopFilterItem } from "@/app/(public)/shop/_data"
+
+function toProductHome(garment: Garment): ProductHome {
+  const badge = garment.tags.includes("bestseller")
+    ? "HOT"
+    : garment.tags.includes("team")
+      ? "TOP"
+      : "NEW"
+  const discount =
+    garment.compareAtPrice && garment.compareAtPrice > garment.price
+      ? `-${Math.round((1 - garment.price / garment.compareAtPrice) * 100)}%`
+      : ""
+
+  return {
+    id: Number(garment.id),
+    image: garment.images[0]?.url ?? "/shirt.png",
+    badge,
+    brand: garment.category.toUpperCase(),
+    title: garment.name,
+    price: `$${garment.price.toFixed(2)}`,
+    compare_price: garment.compareAtPrice ? `$${garment.compareAtPrice.toFixed(2)}` : "",
+    discount,
+    available_color: garment.colors.slice(0, 4).map((color, index) => ({
+      id: index + 1,
+      hex: color.swatch,
+    })),
+  }
+}
 
 function sortProducts(products: Garment[], sort: ProductFilters["sort"] | "") {
   if (!sort) return products
@@ -135,7 +163,17 @@ export function ShopContent({
             </p>
 
             <div className="mt-5">
-              <ProductGrid products={filteredProducts} />
+              {filteredProducts.length === 0 ? (
+                <p className="text-sm text-muted-foreground">No products found.</p>
+              ) : (
+                <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+                  {filteredProducts.map((garment) => (
+                    <Link key={garment.id} href={`/shop/${garment.slug}`} className="block">
+                      <ProductCardSm product={toProductHome(garment)} />
+                    </Link>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </div>
