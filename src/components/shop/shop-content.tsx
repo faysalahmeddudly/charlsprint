@@ -115,7 +115,7 @@ export function ShopContent({
           )}
 
           {/* Right Content */}
-          <div className="flex-1">
+          <div className="flex-1 mt-9">
             {/* <ShopSponsoredBanner /> */}
 
             <div className="mb-2 flex items-center justify-between">
