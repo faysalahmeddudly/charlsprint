@@ -36,7 +36,7 @@ export default function ProductCardSm({ product }: { product: ProductHome }) {
 
     <div className="font-bold text-slate-400 text-[10px] uppercase">{product.brand}</div>
 
-    <div className="font-bold text-slate-800 text-xs">{product.title}</div>
+    <div className="font-bold text-slate-800 text-xs line-clamp-1">{product.title}</div>
 
 
 
