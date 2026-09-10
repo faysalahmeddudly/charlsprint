@@ -143,7 +143,7 @@ export function ShopContent({ products }: { products: Garment[] }) {
                     {filteredProducts.map((garment) => (
                       <Link
                         key={garment.id}
-                        href={`/shop/${garment.slug}`}
+                        href={`/shop/${garment.id}`}
                         className="block"
                       >
                         <ProductCardSm product={toProductHome(garment)} />

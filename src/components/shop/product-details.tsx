@@ -23,9 +23,11 @@ export function ProductDetails({ garment }: { garment: Garment }) {
   const [tierId, setTierId] = useState(garment.pricingTiers[0]?.id)
   const [colorId, setColorId] = useState(garment.colors[0]?.id)
   const [colorModalOpen, setColorModalOpen] = useState(false)
+
   const [quantities, setQuantities] = useState<Record<string, number>>(() =>
     Object.fromEntries(garment.sizes.map((size) => [size.id, size.defaultQty]))
   )
+
   const [justAdded, setJustAdded] = useState(false)
 
   const tier = garment.pricingTiers.find((t) => t.id === tierId) ?? garment.pricingTiers[0]
@@ -61,7 +63,7 @@ export function ProductDetails({ garment }: { garment: Garment }) {
     setTimeout(() => setJustAdded(false), 1800)
   }
 
-  const designHref = `/shop/${garment.slug}/design${
+  const designHref = `/shop/${garment?.id}/design${
     colorId || tierId
       ? `?${new URLSearchParams({
           ...(colorId ? { color: colorId } : {}),
