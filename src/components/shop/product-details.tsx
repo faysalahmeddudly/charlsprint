@@ -1,56 +1,60 @@
-"use client"
+"use client";
 
-import { useMemo, useState } from "react"
-import Image from "next/image"
-import Link from "next/link"
-import { CheckIcon, ShoppingBagIcon, ArrowRightIcon } from "lucide-react"
-import { cn } from "cn"
-import { Button } from "@/components/ui/button"
-import { useCart } from "@/hooks/use-cart"
-import { ColorPickerDialog } from "@/components/shop/color-picker-dialog"
+import { useMemo, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { CheckIcon, ShoppingBagIcon, ArrowRightIcon } from "lucide-react";
+import { cn } from "cn";
+import { Button } from "@/components/ui/button";
+import { useCart } from "@/hooks/use-cart";
+import { ColorPickerDialog } from "@/components/shop/color-picker-dialog";
 import {
   currency,
   isLightColor,
   VISIBLE_COLOR_COUNT,
-} from "@/components/shop/product-customizer.constants"
-import type { Garment } from "@/app/(public)/create-design/_data"
+} from "@/components/shop/product-customizer.constants";
+import type { Garment } from "@/app/(public)/create-design/_data";
 
-const SURFACE_CARD = "rounded-2xl bg-card-secondary p-4"
+const SURFACE_CARD = "rounded-2xl bg-card-secondary p-4";
 
 export function ProductDetails({ garment }: { garment: Garment }) {
-  const { addItem } = useCart()
-  const [activeImageId, setActiveImageId] = useState(garment.images[0]?.id)
-  const [tierId, setTierId] = useState(garment.pricingTiers[0]?.id)
-  const [colorId, setColorId] = useState(garment.colors[0]?.id)
-  const [colorModalOpen, setColorModalOpen] = useState(false)
+  const { addItem } = useCart();
+  const [activeImageId, setActiveImageId] = useState("1");
+  const [tierId, setTierId] = useState(garment.pricingTiers[0]?.id);
+  const [colorId, setColorId] = useState(garment.colors[0]?.id);
+  const [colorModalOpen, setColorModalOpen] = useState(false);
 
   const [quantities, setQuantities] = useState<Record<string, number>>(() =>
-    Object.fromEntries(garment.sizes.map((size) => [size.id, size.defaultQty]))
-  )
+    Object.fromEntries(garment.sizes.map((size) => [size.id, size.defaultQty])),
+  );
 
-  const [justAdded, setJustAdded] = useState(false)
+  const [justAdded, setJustAdded] = useState(false);
 
-  const tier = garment.pricingTiers.find((t) => t.id === tierId) ?? garment.pricingTiers[0]
-  const activeColor = garment.colors.find((c) => c.id === colorId) ?? garment.colors[0]
+  const tier =
+    garment.pricingTiers.find((t) => t.id === tierId) ??
+    garment.pricingTiers[0];
+  const activeColor =
+    garment.colors.find((c) => c.id === colorId) ?? garment.colors[0];
   const activeImage =
-    garment.images.find((image) => image.id === activeImageId) ?? garment.images[0]
+    garment.images.find((image) => image.id === activeImageId) ??
+    garment.images[0];
 
   const totalUnits = useMemo(
     () => Object.values(quantities).reduce((sum, qty) => sum + qty, 0),
-    [quantities]
-  )
+    [quantities],
+  );
 
   const discountPercent =
     garment.compareAtPrice && garment.compareAtPrice > garment.price
       ? Math.round((1 - garment.price / garment.compareAtPrice) * 100)
-      : undefined
+      : undefined;
 
   function setQty(sizeId: string, value: number) {
-    setQuantities((prev) => ({ ...prev, [sizeId]: Math.max(0, value) }))
+    setQuantities((prev) => ({ ...prev, [sizeId]: Math.max(0, value) }));
   }
 
   function handleAddToCart() {
-    if (totalUnits === 0 || !activeImage) return
+    if (totalUnits === 0 || !activeImage) return;
     addItem({
       productId: garment.id,
       variantId: activeColor?.id,
@@ -58,9 +62,9 @@ export function ProductDetails({ garment }: { garment: Garment }) {
       image: activeImage.url,
       price: garment.price,
       quantity: totalUnits,
-    })
-    setJustAdded(true)
-    setTimeout(() => setJustAdded(false), 1800)
+    });
+    setJustAdded(true);
+    setTimeout(() => setJustAdded(false), 1800);
   }
 
   const designHref = `/shop/${garment?.id}/design${
@@ -70,45 +74,61 @@ export function ProductDetails({ garment }: { garment: Garment }) {
           ...(tierId ? { tier: tierId } : {}),
         }).toString()}`
       : ""
-  }`
+  }`;
 
   return (
-    <div className="space-y-10">
+    <div className="space-y-10 mt-[50px] mb-[150px] max-w-[1240px] mx-auto">
       <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_380px]">
-        <div className="space-y-3">
-          <div className="relative aspect-square overflow-hidden rounded-lg border border-border bg-muted/40">
+        
+        {/* image div */}
+        <div className="flex flex-col gap-[25px]">
+
+
+
+          <div className="relative aspect-[137/105] overflow-hidden rounded-[22px] border border-[#E5E5E5] ">
             {activeImage && (
               <Image
-                src={activeImage.url}
-                alt={activeImage.alt}
+                src={activeImage?.url}
+                alt={activeImage?.alt}
                 fill
                 className="object-contain"
                 priority
               />
             )}
           </div>
-          {garment.images.length > 1 && (
+
+          {/* for orginally use but now i make the image if garment.images.length > 1 && but still now i make it statically */}
+          {
             <div className="flex flex-wrap gap-2">
-              {garment.images.map((image) => (
+              {[{ id: 1 }, { id: 2 }, { id: 3 }].map((image) => (
                 <button
                   key={image.id}
                   type="button"
-                  onClick={() => setActiveImageId(image.id)}
+                  onClick={() => setActiveImageId(String(image.id))}
                   className={cn(
                     "relative size-16 shrink-0 overflow-hidden rounded-md border-2 bg-muted/40",
-                    image.id === activeImage?.id ? "border-destructive" : "border-transparent"
+                    String(image.id) === activeImageId
+                      ? "border-destructive"
+                      : "border-transparent",
                   )}
                 >
-                  <Image src={image.url} alt={image.alt} fill className="object-contain" />
+                  <Image
+                    src={activeImage.url}
+                    alt={activeImage.alt}
+                    fill
+                    className="object-contain"
+                  />
                 </button>
               ))}
             </div>
-          )}
+          }
         </div>
 
         <div className="space-y-4">
           <div>
-            <h1 className="text-xl font-semibold tracking-tight">{garment.name}</h1>
+            <h1 className="text-xl font-semibold tracking-tight">
+              {garment.name}
+            </h1>
             <p className="text-xs text-muted-foreground">
               {garment.fabric} • {garment.fit}
             </p>
@@ -144,7 +164,7 @@ export function ProductDetails({ garment }: { garment: Garment }) {
                     "rounded-md px-2 py-2 text-xs font-medium transition-colors",
                     t.id === tier.id
                       ? "bg-destructive text-white"
-                      : "bg-background text-muted-foreground hover:bg-background/70"
+                      : "bg-background text-muted-foreground hover:bg-background/70",
                   )}
                 >
                   {t.label}
@@ -154,7 +174,9 @@ export function ProductDetails({ garment }: { garment: Garment }) {
             <div className="grid grid-cols-7 gap-1.5">
               {garment.sizes.map((size) => (
                 <div key={size.id} className="space-y-1 text-center">
-                  <p className="text-[11px] text-muted-foreground">{size.label}</p>
+                  <p className="text-[11px] text-muted-foreground">
+                    {size.label}
+                  </p>
                   <input
                     type="number"
                     min={0}
@@ -166,9 +188,14 @@ export function ProductDetails({ garment }: { garment: Garment }) {
               ))}
             </div>
             <div className="mt-3 flex items-center justify-between border-t border-border pt-3">
-              <span className="text-xs text-muted-foreground">Aggregate Batch Run:</span>
+              <span className="text-xs text-muted-foreground">
+                Aggregate Batch Run:
+              </span>
               <span className="text-lg font-semibold text-destructive">
-                {totalUnits} <span className="text-xs font-medium text-foreground">units total</span>
+                {totalUnits}{" "}
+                <span className="text-xs font-medium text-foreground">
+                  units total
+                </span>
               </span>
             </div>
           </section>
@@ -199,14 +226,16 @@ export function ProductDetails({ garment }: { garment: Garment }) {
                     "flex size-9 shrink-0 items-center justify-center rounded-md border transition-shadow",
                     color.id === colorId
                       ? "border-foreground ring-2 ring-offset-1 ring-foreground/40"
-                      : "border-border"
+                      : "border-border",
                   )}
                   style={{ backgroundColor: color.swatch }}
                 >
                   {color.id === colorId && (
                     <CheckIcon
                       className="size-4"
-                      style={{ color: isLightColor(color.swatch) ? "#111" : "#fff" }}
+                      style={{
+                        color: isLightColor(color.swatch) ? "#111" : "#fff",
+                      }}
                     />
                   )}
                 </button>
@@ -238,6 +267,13 @@ export function ProductDetails({ garment }: { garment: Garment }) {
         </div>
       </div>
 
+
+
+
+
+{/* details container & action button  */}
+
+
       {garment.sizeChart && garment.sizeChart.length > 0 && (
         <div className="overflow-x-auto">
           <table className="w-full min-w-[420px] border-collapse text-sm">
@@ -253,9 +289,15 @@ export function ProductDetails({ garment }: { garment: Garment }) {
               {garment.sizeChart.map((row) => (
                 <tr key={row.size} className="border-b border-border/60">
                   <td className="px-3 py-2 font-medium">{row.size}</td>
-                  <td className="px-3 py-2 text-muted-foreground">{row.length}</td>
-                  <td className="px-3 py-2 text-muted-foreground">{row.width}</td>
-                  <td className="px-3 py-2 text-muted-foreground">{row.sleeve}</td>
+                  <td className="px-3 py-2 text-muted-foreground">
+                    {row.length}
+                  </td>
+                  <td className="px-3 py-2 text-muted-foreground">
+                    {row.width}
+                  </td>
+                  <td className="px-3 py-2 text-muted-foreground">
+                    {row.sleeve}
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -270,6 +312,9 @@ export function ProductDetails({ garment }: { garment: Garment }) {
         colorId={colorId}
         onAccept={setColorId}
       />
+
+
+      
     </div>
-  )
+  );
 }

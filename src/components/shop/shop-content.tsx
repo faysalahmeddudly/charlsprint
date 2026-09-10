@@ -76,7 +76,7 @@ export function ShopContent({ products }: { products: Garment[] }) {
   }, [products, search, sortBy]);
 
   return (
-    <section className="w-full bg-white px-4 pb-4 sm:px-6 sm:pb-10 lg:px-10">
+    <section className="w-full bg-white px-4 pb-15 sm:px-6 sm:pb-10 lg:px-10">
       <div className="mx-auto max-w-[1240px]">
         <div className="flex gap-[42px]">
           {/* Left Sidebar */}
@@ -143,7 +143,8 @@ export function ShopContent({ products }: { products: Garment[] }) {
                     {filteredProducts.map((garment) => (
                       <Link
                         key={garment.id}
-                        href={`/shop/${garment.id}`}
+                        // href={`/shop/${garment.id}`}//want to keep it fixed
+                        href={"/shop/as-colour-5001-staple"}
                         className="block"
                       >
                         <ProductCardSm product={toProductHome(garment)} />

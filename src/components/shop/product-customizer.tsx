@@ -94,9 +94,10 @@ export function ProductCustomizer({
   }
 
   return (
+    <div className="max-w-[1216px] mx-auto">
     <div className="mx-auto grid grid-cols-[1fr_426.67px] gap-3.5">
       {/* preview shirt  */}
-      <div className="max-w-233 space-y-[34px]">
+      <div className="max-w-233 min-w-0 space-y-[34px]">
         <div className="flex flex-nowrap gap-2 bg-white px-6 py-1 shadow-sm">
           {garment.printZones.map((zone) => {
             const applied = Boolean(zoneContent[zone.id]);
@@ -610,6 +611,8 @@ export function ProductCustomizer({
           }))
         }
       />
+    </div>
+
     </div>
   );
 }
