@@ -78,7 +78,7 @@ export function ShopContent({ products }: { products: Garment[] }) {
   return (
     <section className="w-full bg-white px-4 pb-4 sm:px-6 sm:pb-10 lg:px-10">
       <div className="mx-auto max-w-[1216px]">
-        <div className="flex gap-6">
+        <div className="flex gap-[42px]">
           {/* Left Sidebar */}
           <aside
             className={`fixed top-0 left-0 z-10 py-[34px] px-[19px] bg-white md:bg-[#F3F3F3] h-full w-65 shrink-0 overflow-y-auto transition-transform duration-300 md:static md:h-auto md:w-55 md:translate-x-0 ${
